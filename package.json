@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
+    "watch": "nodemon server.js",
     "seed": "node seeds/seed.js"
   },
   "keywords": [],
@@ -25,5 +26,13 @@
     "eslint": "^7.12.1",
     "eslint-config-prettier": "^6.15.0",
     "prettier": "^2.1.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CommunityCareProfessionals/communityCareProfessionals-.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CommunityCareProfessionals/communityCareProfessionals-/issues"
+  },
+  "homepage": "https://github.com/CommunityCareProfessionals/communityCareProfessionals-#readme"
 }

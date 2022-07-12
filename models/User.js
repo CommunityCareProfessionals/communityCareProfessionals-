@@ -16,7 +16,19 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    first_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    last_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    country: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    zip_code: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -27,6 +39,12 @@ User.init(
       validate: {
         isEmail: true,
       },
+    },
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: false,
+      comment: 'Is user a consumer or a professional',
     },
     password: {
       type: DataTypes.STRING,
@@ -43,7 +61,10 @@ User.init(
         return newUserData;
       },
       beforeUpdate: async (updatedUserData) => {
-        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        updatedUserData.password = await bcrypt.hash(
+          updatedUserData.password,
+          10
+        );
         return updatedUserData;
       },
     },
