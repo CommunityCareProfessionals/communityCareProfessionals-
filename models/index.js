@@ -49,4 +49,6 @@ Skill.belongsToMany(User, {
   // Define an alias for when data is retrieved
   as: "skill_users",
 });
+
 module.exports = { User, Project, Category, Skill, UserSkill };
+

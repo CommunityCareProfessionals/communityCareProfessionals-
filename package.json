@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
+
     "watch": "nodemon server.js",
     "seed": "node seeds/seed.js"
   },
@@ -35,4 +36,5 @@
     "url": "https://github.com/CommunityCareProfessionals/communityCareProfessionals-/issues"
   },
   "homepage": "https://github.com/CommunityCareProfessionals/communityCareProfessionals-#readme"
+  }
 }
