@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection");
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
 class UserSkill extends Model {}
 
@@ -15,31 +15,31 @@ UserSkill.init(
       type: DataTypes.DATE,
       allowNull: true,
       comment:
-        "When user acquired this skill. Used to determine years of experience",
+        'When user acquired this skill. Used to determine years of experience',
     },
     skill_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: "skill",
-        key: "id",
+        model: 'skill',
+        key: 'id',
         unique: false,
       },
     },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: "user",
-        key: "id",
+        model: 'user',
+        key: 'id',
         unique: false,
       },
     },
   },
   {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: "userskill",
+    modelName: 'userskill',
   }
 );
 
