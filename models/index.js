@@ -1,17 +1,17 @@
-const User = require("./User");
-const Project = require("./Project");
-const Category = require("./Category");
-const Skill = require("./Skill");
-const SkillCategory = require("./SkillCategory");
-const UserSkill = require("./UserSkill");
+const User = require('./User');
+const Project = require('./Project');
+const Category = require('./Category');
+const Skill = require('./Skill');
+const SkillCategory = require('./SkillCategory');
+const UserSkill = require('./UserSkill');
 
 User.hasMany(Project, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE',
 });
 
 Project.belongsTo(User, {
-  foreignKey: "user_id",
+  foreignKey: 'user_id',
 });
 
 Category.belongsToMany(Skill, {
@@ -20,7 +20,7 @@ Category.belongsToMany(Skill, {
     unique: true,
   },
   // Define an alias for when data is retrieved
-  as: "skill_categories",
+  as: 'skill_categories',
 });
 
 Skill.belongsToMany(Category, {
@@ -29,7 +29,7 @@ Skill.belongsToMany(Category, {
     unique: true,
   },
   // Define an alias for when data is retrieved
-  as: "category_skills",
+  as: 'category_skills',
 });
 
 User.belongsToMany(Skill, {
@@ -38,7 +38,7 @@ User.belongsToMany(Skill, {
     unique: true,
   },
   // Define an alias for when data is retrieved
-  as: "user_skills",
+  as: 'user_skills',
 });
 
 Skill.belongsToMany(User, {
@@ -47,6 +47,7 @@ Skill.belongsToMany(User, {
     unique: true,
   },
   // Define an alias for when data is retrieved
-  as: "skill_users",
+  as: 'skill_users',
 });
+
 module.exports = { User, Project, Category, Skill, UserSkill };
