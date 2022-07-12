@@ -1,36 +1,42 @@
 [
   {
-    "name": "Sal",
+    "first_name": "Sal",
+    "last_name": "Tal",
     "email": "sal@hotmail.com",
     "type": "professional",
     "password": "password12345"
   },
   {
-    "name": "Lernantino",
+    "first_name": "Lernantino",
+    "last_name": "Tarantino",
     "email": "lernantino@gmail.com",
     "type": "professional",    
     "password": "password12345"
   },
   {
-    "name": "Amiko",
+    "first_name": "Amiko",
+    "last_name": "Banto",
     "email": "amiko2k20@aol.com",
     "type": "professional",    
     "password": "password12345"
   },
   {
-    "name": "Sally",
+    "first_name": "Sally",
+    "last_name": "Torry",
     "email": "sally@hotmail.com",
     "type": "consumer",
     "password": "password12345"
   },
   {
-    "name": "Martin",
+    "first_name": "Martin",
+    "last_name": "Nango",
     "email": "martin@gmail.com",
     "type": "consumer",    
     "password": "password12345"
   },
   {
-    "name": "Montana",
+    "first_name": "Montana",
+    "last_name": "Nino",
     "email": "montana@aol.com",
     "type": "consumer",    
     "password": "password12345"
