@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "name": "Networking",
+    "description": "Networking"
+  },
+  {
+    "id": 2,
+    "name": "Reading Comprehension",
+    "description": "Reading Comprehension"
+  },
+  {
+    "id": 3,
+    "name": "Verbal/Written Communication",
+    "description": "Verbal/Written Communication"
+  },
+  {
+    "id": 4,
+    "name": "Tax Law",
+    "description": "Tax Law"
+  },
+  {
+    "id": 5,
+    "name": "Litigation",
+    "description": "Litigation"
+  },
+  {
+    "id": 6,
+    "name": "Family Law",
+    "description": "Family Law"
+  },
+  {
+    "id": 7,
+    "name": "Electrical",
+    "description": "Electrical"
+  },
+  {
+    "id": 8,
+    "name": "Landscaping",
+    "description": "Landscaping"
+  },
+  {
+    "id": 9,
+    "name": "Heating & Air Conditioning",
+    "description": "Heating & Air Conditioning"
+  },
+  {
+    "id": 10,
+    "name": "STEM",
+    "description": "STEM"
+  },
+  {
+    "id": 11,
+    "name": "Sports Coaching",
+    "description": "Sports Coaching"
+  },
+  {
+    "id": 12,
+    "name": "Tutoring",
+    "description": "Tutoring"
+  },
+  {
+    "id": 13,
+    "name": "English",
+    "description": "English"
+  },
+  {
+    "id": 14,
+    "name": "French",
+    "description": "French"
+  },
+  {
+    "id": 15,
+    "name": "Spanish",
+    "description": "Spanish"
+  }
+]

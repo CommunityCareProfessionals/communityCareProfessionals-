@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Interpersonal",
+    "description": "Interpersonal"
+  },
+  {
+    "id": 2,
+    "name": "Legal & Advocacy",
+    "description": "Legal & Advocacy"
+  },
+  {
+    "id": 3,
+    "name": "Housing & Facilities",
+    "description": "Housing & Facilities"
+  },
+  {
+    "id": 4,
+    "name": "Education & Literacy",
+    "description": "Education & Literacy"
+  },
+  {
+    "id": 5,
+    "name": "Language & Culture",
+    "description": "Language & Culture"
+  }
+]
