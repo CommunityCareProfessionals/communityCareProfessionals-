@@ -26,8 +26,7 @@ ServiceRequest.init(
     },
     service_date: {
       type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
+      allowNull: true,
       comment: 'date service was executed',
     },
     provider_id: {
