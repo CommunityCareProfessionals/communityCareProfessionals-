@@ -1,0 +1,21 @@
+<!-- Loop over each object in the projects array -->
+{{#each services as |service| }}
+<div class="row mb-4 service">
+  <div class="col-md-5">
+    <h2>
+      <!-- Call helper function with triple brackets to render the emoji span as HTML -->
+      {{!-- {{{get_emoji}}} --}}
+      <a href="/api/service/{{service.id}}">{{service.name}}</a>
+    </h2>
+    <p>
+      {{service.description}}
+    </p>
+    {{!-- <p>Created by {{project.user.name}} on {{format_date project.date_created}}</p> --}}
+  </div>
+  <div class="col-md-7">
+    <p>
+      {{service.description}}
+    </p>
+  </div>
+</div>
+{{/each}}

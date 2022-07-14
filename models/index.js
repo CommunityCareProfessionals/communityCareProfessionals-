@@ -4,6 +4,7 @@ const Category = require('./Category');
 const Skill = require('./Skill');
 const SkillCategory = require('./SkillCategory');
 const UserSkill = require('./UserSkill');
+const ServiceRequest = require('./ServiceRequest');
 
 User.hasMany(Project, {
   foreignKey: 'user_id',
@@ -48,6 +49,35 @@ Skill.belongsToMany(User, {
   },
   // Define an alias for when data is retrieved
   as: 'skill_users',
+});
+
+Skill.hasMany(ServiceRequest, {
+  foreignKey: 'skill_id',
+  onDelete: 'CASCADE',
+});
+
+ServiceRequest.belongsTo(Skill, {
+  foreignKey: 'skill_id',
+});
+
+User.hasMany(ServiceRequest, {
+  foreignKey: 'provider_id',
+  onDelete: 'CASCADE',
+});
+
+ServiceRequest.belongsTo(User, {
+  as: 'provider',
+  foreignKey: 'provider_id',
+});
+
+User.hasMany(ServiceRequest, {
+  foreignKey: 'consumer_id',
+  onDelete: 'CASCADE',
+});
+
+ServiceRequest.belongsTo(User, {
+  as: 'consumer',
+  foreignKey: 'consumer_id',
 });
 
 module.exports = { User, Project, Category, Skill, UserSkill };
