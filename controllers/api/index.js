@@ -5,6 +5,6 @@ const serviceRequestRoutes = require('./serviceRequestRoutes');
 
 router.use('/users', userRoutes);
 router.use('/projects', projectRoutes);
-router.use('/service', serviceRequestRoutes);
+router.use('/services', serviceRequestRoutes);
 
 module.exports = router;

@@ -21,7 +21,7 @@ Category.belongsToMany(Skill, {
     unique: true,
   },
   // Define an alias for when data is retrieved
-  as: 'skill_categories',
+  as: 'category_skills',
 });
 
 Skill.belongsToMany(Category, {
@@ -30,7 +30,7 @@ Skill.belongsToMany(Category, {
     unique: true,
   },
   // Define an alias for when data is retrieved
-  as: 'category_skills',
+  as: 'skill_categories',
 });
 
 User.belongsToMany(Skill, {

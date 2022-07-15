@@ -1,0 +1,124 @@
+<div class="container">
+  <div class="row mt-4">   
+    <div class="col-md-6">
+      <p><strong>Submit a title for your request</strong></p>
+      <section>
+        <div class="mb-20">
+          <textarea rows="1" id="new_service_title" placeholder="" style="height: 47px; overflow: hidden"></textarea>
+        </div>
+        <br>
+        <br>
+        <div id="title_examples" class="mt-25" style="display: block;">
+          <strong>Example titles</strong>
+          <ul>
+            <li>Need an accountant to review my taxes</li>
+            <li>My AC compressor is freezing up and I need assistance repairing</li>
+            <li>I need help installing MS Office on my PC</li>
+          </ul>
+        </div>
+        <fieldset id="choose_category_fieldset" style="display: none; flex-direction: column">
+          <div id="choose_categories" class="mt-25">
+            <div><strong>Select Category</strong></div>
+              {{#each top_categories}} 
+                <div>
+                  <input type="radio" {{#if @first }} checked="checked" {{/if}} id="{{id}}" name="request_category" value="{{id}}" class="mb-2 mt-5" onclick="displaySkillsHandler(this)" data-level="page">
+                  <label for="{{id}}">{{name}}</label>
+                </div>
+                <fieldset {{#if @first }} style="display: flex; flex-wrap: wrap;" {{else}} style="display: none;" {{/if}} class="ml-5" name="category_skills_page" id="category_skills_page{{id}}">
+                {{#each category_skills}}
+                    <div class="mr-5" id="service_skills">
+                      <input type="checkbox" name="{{id}}" id="{{id}}">
+                      <label for="{{id}}">{{name}}</label>
+                    </div>
+                {{/each}} 
+                </fieldset>                              
+              {{/each}}                    
+          </div>
+          <br>
+          <div class="mt-5">
+            <a id="see_all_categories_btn" href="#">See all categories</a>
+          </div>      
+        </fieldset>
+      </section>
+    </div>
+  </div>
+<div class="row mt-4">   
+  <div class="col-md-6">
+    <section>
+      <button type="submit" class="btn btn-primary mr-3" id="back_title_btn">Back</button>
+      <button type="submit" class="btn btn-primary ml-3" id="continue_title_btn">Continue</button>
+    </section>
+  </div>  
+</div>
+<div id="categoryModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+      {{#each categories}}
+          <div>
+            <input type="radio" id="{{id}}" name="request_category" value="{{id}}" class="mb-2 mt-5" onclick="displaySkillsHandler(this)" data-level="modal">
+            <label for="{{id}}">{{name}}</label>
+          </div>
+          <fieldset style="display: none;" class="ml-5" name="category_skills_modal" id="category_skills_modal{{id}}">
+          {{#each category_skills}}
+              <div class="mr-5" id="service_skills">
+                <input type="checkbox" name="{{id}}" id="{{id}}">
+                <label for="{{id}}">{{name}}</label>
+              </div>
+          {{/each}} 
+          </fieldset>                   
+      {{/each}}
+      <br>
+    <section>
+      <button type="submit" class="btn btn-primary mr-3" id="modal_close" onclick='modal.style.display = "none"'>Close</button>
+      <button type="submit" class="btn btn-primary ml-3" id="modal_save">Save</button>
+    </section>    
+  </div>
+</div>
+</div>
+
+<script src="../../js/service.js"></script>
+<script>
+  displaySkillsHandler = (radioBtn) => {
+    let level = "";
+
+    if (radioBtn.hasAttribute('data-level')) {
+      level = radioBtn.getAttribute('data-level');
+    }
+
+    console.log(document.querySelectorAll('fieldset[name="category_skills_' + level + '"]'));
+    
+    document.querySelectorAll('fieldset[name="category_skills_' + level + '"]').forEach((field) => {
+      field.style.display = "none";  
+    })
+    
+    document.querySelector('#category_skills_' + level + radioBtn.id).style.display = "flex";
+    document.querySelector('#category_skills_' + level + radioBtn.id).style.flexWrap = "wrap";
+
+  }
+    // Get the modal
+  var modal = document.getElementById("categoryModal");
+
+  // Get the button that opens the modal
+  var btn = document.querySelector("#see_all_categories_btn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>

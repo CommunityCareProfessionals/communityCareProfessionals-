@@ -7,6 +7,7 @@
   <title>Community  Care Professionals</title>
   <link rel="stylesheet" href="/css/jass.css">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/modal.css">
 </head>
 
 <body>
@@ -19,6 +20,7 @@
       <nav>
         <!-- Conditionally render login or logout links -->
         {{#if logged_in}}
+        <a href="/api/services/getting-started">Post a Service Request</a> |
         <a href="/profile">profile</a> |
         <button class="no-button" id="logout">logout</button>
         {{else}}
