@@ -79,4 +79,16 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get('/signup', async (req, res) => {
+  res.render('signup');
+
+  console.log(req.session.logged_in, 'req.sess')
+  if (req.session.logged_in) {
+    res.redirect('/profile');
+    return;
+  }
+  
+
+})
+
 module.exports = router;
