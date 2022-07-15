@@ -2,6 +2,7 @@ const router = require('express').Router();
 const ServiceRequest = require('../../models/ServiceRequest');
 const User = require('../../models/User');
 const Skill = require('../../models/Skill');
+const Category = require('../../models/Category');
 const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -22,6 +23,64 @@ router.get('/', async (req, res) => {
     res.render('services', {
       services,
       logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get('/getting-started', async (req, res) => {
+  try {
+    // Find an existing service based on the logged in user
+    const serviceData = await ServiceRequest.findAll({
+      include: [
+        { model: User, as: 'provider' },
+        { model: User, as: 'consumer' },
+        { model: Skill },
+      ],
+      where: {
+        consumer_id: req.session.user.id,
+      },
+    });
+
+    const services = serviceData.map((service) => {
+      return service.get({ plain: true });
+    });
+
+    res.render('service_getting_started', {
+      user: req.session.user,
+      services,
+      logged_in: true,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/title', async (req, res) => {
+  console.log('query count', req.query.count);
+
+  try {
+    const categoryData = await Category.findAll({
+      include: [
+        {
+          model: Skill,
+          as: 'category_skills',
+        },
+      ],
+    });
+
+    const categories = categoryData.map((category) => {
+      return category.get({ plain: true });
+    });
+
+    console.log(categories);
+
+    res.render('service_title', {
+      categories,
+      top_categories: categories.slice(0, 3),
+      logged_in: true,
     });
   } catch (err) {
     console.log(err);

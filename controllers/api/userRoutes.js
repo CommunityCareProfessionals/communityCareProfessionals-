@@ -38,9 +38,13 @@ router.post('/login', async (req, res) => {
       return;
     }
 
+    // Remove password before sending back to profile
+    delete userData.password; // alternatively, delete userData["password"]
+
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
+      req.session.user = userData.get({ plain: true });
 
       res.json({ user: userData, message: 'You are now logged in!' });
     });

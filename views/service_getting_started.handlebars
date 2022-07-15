@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <header>
+        <h4>Getting started</h4>
+      </header>
+    </div> 
+  </div>
+  <div class="row mt-4">   
+    <div class="col-md-6">
+      <p>What would you like to do?</p>
+      <section>
+        <input type="radio" id="new_service_radio" name="service_getting_started" value="new">
+        <label for="html">Create a new service request</label><br><br>
+        <input type="radio" id="existing_service_radio" name="service_getting_started" value="existing">
+        <label for="html">Update an existing request</label>    
+        <div id="existing-services" class="mt-5" style="display: none;">
+          <select name="existing-service-to-edit" id="existing-service-to-edit">    {{!--only show when the existing request radio button is selected. Otherwise, hide--}}
+            {{#each services}}
+              <option value="{{id}}">{{name}}</option>
+            {{/each}}
+          </select>
+        </div>    
+      </section>
+    </div>
+  </div>
+<div class="row mt-4">   
+  <div class="col-md-6">
+    <section>
+      <button type="submit" class="btn btn-primary mr-3" id="cancel_getting_started_btn">Cancel</button>
+      <button type="submit" class="btn btn-primary ml-3" id="continue_getting_started_btn">Continue</button>
+    </section>
+  </div>  
+</div>
+</div>
+
+<script src="../../js/service.js"></script>
