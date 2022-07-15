@@ -31,12 +31,14 @@ const signupFormHandler = async (event) => {
   const password = document.querySelector('#password-signup').value.trim();
   const type = document.querySelector('input[name=type-signup]:checked').value;
 
+  console.log(first_name, last_name, email, password, type, 'signupdata')
   if (first_name && last_name && email && password && type) {
     const response = await fetch('/api/users', {
       method: 'POST',
       body: JSON.stringify({ first_name, last_name, email, password, type }),
       headers: { 'Content-Type': 'application/json' },
     });
+    console.log(response);
 
     if (response.ok) {
       document.location.replace('/profile');
@@ -46,9 +48,15 @@ const signupFormHandler = async (event) => {
   }
 };
 
-document
+if (document.querySelector('.login-form')) {
+  document
   .querySelector('.login-form')
   .addEventListener('submit', loginFormHandler);
+}
+
+// document
+//   .querySelector('.login-form')
+//   .addEventListener('submit', loginFormHandler);
 
 document
   .querySelector('.signup-form')
