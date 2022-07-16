@@ -31,10 +31,10 @@ const signupFormHandler = async (event) => {
   const email = document.querySelector('#email-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
   const type = document.querySelector('input[name=type-signup]:checked').value;
-  const cat = document.querySelector('input[name=type-provider]:checked').value;
+  // const cat = document.querySelector('input[name=type-provider]:checked').value;
 
-  console.log(first_name, last_name, email, password, type, cat, 'signupdata');
-  if (first_name && last_name && email && password && type && cat) {
+  console.log(first_name, last_name, email, password, type, 'signupdata');
+  if (first_name && last_name && email && password && type) {
     const response = await fetch('/api/users', {
       method: 'POST',
       body: JSON.stringify({
@@ -43,7 +43,6 @@ const signupFormHandler = async (event) => {
         email,
         password,
         type,
-        cat,
       }),
       headers: { 'Content-Type': 'application/json' },
     });
