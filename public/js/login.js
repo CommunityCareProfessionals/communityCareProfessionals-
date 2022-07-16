@@ -18,7 +18,7 @@ const loginFormHandler = async (event) => {
       document.location.replace('/profile');
     } else {
       alert(response.statusText);
-      console.log('fail')
+      console.log('fail');
     }
   }
 };
@@ -37,17 +37,23 @@ const signupFormHandler = async (event) => {
   if (first_name && last_name && email && password && type && cat) {
     const response = await fetch('/api/users', {
       method: 'POST',
-      body: JSON.stringify({ first_name, last_name, email, password, type, cat }),
+      body: JSON.stringify({
+        first_name,
+        last_name,
+        email,
+        password,
+        type,
+        cat,
+      }),
       headers: { 'Content-Type': 'application/json' },
     });
     console.log(response);
 
-
     if (response.ok) {
-      document.location.replace('/profile');
+      document.location.replace('/dashboard');
     } else {
       alert(response.statusText);
-      console.log('fail')
+      console.log('fail');
     }
   }
 };
