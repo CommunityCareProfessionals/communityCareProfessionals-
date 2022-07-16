@@ -46,10 +46,10 @@ ServiceRequest.init(
         key: 'id',
       },
     },
-    skill_id: {
+    category_skill_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'skill',
+        model: 'skillcategory',
         key: 'id',
       },
     },

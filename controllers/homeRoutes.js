@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { Project, User, Category } = require('../models');
+const { Project, User } = require('../models');
+const ServiceRequest = require('../models/ServiceRequest');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -49,7 +50,6 @@ router.get('/project/:id', async (req, res) => {
   }
 });
 
-// Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
@@ -82,13 +82,36 @@ router.get('/login', (req, res) => {
 router.get('/signup', async (req, res) => {
   res.render('signup');
 
-  console.log(req.session.logged_in, 'req.sess')
+  console.log(req.session.logged_in, 'req.sess');
   if (req.session.logged_in) {
     res.redirect('/profile');
     return;
   }
-  
+});
 
-})
+router.get('/dashboard', withAuth, async (req, res) => {
+  try {
+    // Find the logged in user based on the session ID
+    const serviceRequestData = await ServiceRequest.findAll({
+      where: {
+        consumer_id: req.session.user_id,
+      },
+    });
+
+    const serviceRequests = serviceRequestData.map((sr) =>
+      sr.get({ plain: true })
+    );
+
+    console.log(serviceRequests);
+
+    res.render('dashboard_temp', {
+      serviceRequests,
+      logged_in: true,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
