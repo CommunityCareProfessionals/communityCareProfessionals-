@@ -1,29 +1,3 @@
-const newFormHandler = async (event) => {
-  event.preventDefault();
-
-  const name = document.querySelector('#project-name').value.trim();
-  const needed_funding = document
-    .querySelector('#project-funding')
-    .value.trim();
-  const description = document.querySelector('#project-desc').value.trim();
-
-  if (name && needed_funding && description) {
-    const response = await fetch(`/api/projects`, {
-      method: 'POST',
-      body: JSON.stringify({ name, needed_funding, description }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (response.ok) {
-      document.location.replace('/profile');
-    } else {
-      alert('Failed to create project');
-    }
-  }
-};
-
 const newOrExistingServiceHandler = (event) => {
   var existing_services_radio = document.querySelector(
     '#existing_service_radio'
@@ -63,6 +37,80 @@ const titleChangeHandler = async (event) => {
   }
 };
 
+displaySkillsHandler = (radioBtn) => {
+  let level = '';
+
+  if (radioBtn.hasAttribute('data-level')) {
+    level = radioBtn.getAttribute('data-level');
+  }
+
+  document
+    .querySelector('#selectedSkill')
+    .setAttribute('data-category_name', radioBtn.getAttribute('data-name'));
+
+  document.querySelectorAll('fieldset[data-level]').forEach((field) => {
+    field.style.display = 'none';
+  });
+
+  document.querySelector(
+    '#category_skills_' + level + radioBtn.id
+  ).style.display = 'flex';
+  document.querySelector(
+    '#category_skills_' + level + radioBtn.id
+  ).style.flexWrap = 'wrap';
+};
+
+handleSkillSelection = (radioBtn) => {
+  document.querySelector('#selectedSkill').textContent =
+    radioBtn.getAttribute('data-name');
+  document
+    .querySelector('#selectedSkill')
+    .setAttribute('data-category_skill_id', radioBtn.getAttribute('data-id'));
+  document
+    .querySelector('#selectedSkill')
+    .setAttribute('data-skill_name', radioBtn.getAttribute('data-name'));
+
+  if (document.querySelector('#selectedSkill').textContent) {
+    document.querySelector('#selectedSkillWrapper').style.display = 'block';
+  } else {
+    document.querySelector('#selectedSkillWrapper').style.display = 'none';
+  }
+};
+
+submitServiceRequest = async () => {
+  const category_skill_id = document
+    .querySelector('#selectedSkill')
+    .getAttribute('data-category_skill_id');
+  const category_name = document
+    .querySelector('#selectedSkill')
+    .getAttribute('data-category_name');
+  const skill_name = document
+    .querySelector('#selectedSkill')
+    .getAttribute('data-skill_name');
+
+  const description = document.querySelector('#new_service_title').value;
+
+  if (category_skill_id && category_name && skill_name && description) {
+    const response = await fetch(`/api/services/new`, {
+      method: 'POST',
+      body: JSON.stringify({
+        category_skill_id,
+        description,
+        name: category_name + '_' + skill_name + '_' + datetimestamp(),
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      gotoDashboard();
+    } else {
+      alert('Failed to create service request');
+    }
+  }
+};
+
 const gotoTitle = (e) => {
   document.location.replace('/api/services/title');
 };
@@ -72,7 +120,7 @@ const gotoGettingStarted = (e) => {
 };
 
 const gotoDashboard = (e) => {
-  document.location.replace('/api/dashboard');
+  document.location.replace('/dashboard');
 };
 
 if (document.querySelector('#existing_service_radio')) {
@@ -109,4 +157,21 @@ if (document.querySelector('#new_service_title')) {
   document
     .querySelector('#new_service_title')
     .addEventListener('keypress', titleChangeHandler);
+}
+
+if (document.querySelector('#continue_title_btn')) {
+  document
+    .querySelector('#continue_title_btn')
+    .addEventListener('click', submitServiceRequest);
+}
+
+function datetimestamp() {
+  var today = new Date();
+  var sToday = (today.getMonth() + 1).toString();
+  sToday += today.getDate().toString();
+  sToday += today.getYear().toString();
+  sToday += today.getHours().toString();
+  sToday += today.getMinutes().toString();
+  sToday += today.getSeconds().toString();
+  return sToday;
 }
