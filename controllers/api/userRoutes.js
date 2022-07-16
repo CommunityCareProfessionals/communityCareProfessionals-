@@ -3,7 +3,7 @@ const { User } = require('../../models');
 
 router.post('/', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    let userData = await User.findOne({ where: { email: req.body.email } });
 
     // Added by TP for testing only
     if (!userData) {
