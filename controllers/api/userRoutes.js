@@ -3,15 +3,17 @@ const { User } = require('../../models');
 
 router.post('/', async (req, res) => {
   try {
-    console.log(req.body);
-    // commented out by TP for testing only
-    // const userData = await User.create(req.body);
-
-    // introduced by TP for testing only
     const userData = await User.findOne({ where: { email: req.body.email } });
 
+    // Added by TP for testing only
+    if (!userData) {
+      userData = await User.create(req.body);
+    }
+
     // Remove password before storing in session
-    delete userData.password; // alternatively, delete userData["password"]
+    if (userData && userData.password) {
+      delete userData.password; // alternatively, delete userData["password"]
+    }
 
     console.log(userData);
 
