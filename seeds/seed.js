@@ -11,6 +11,8 @@ const skillCategoryData = require('./skillCategoryData.json');
 const userSkillData = require('./userSkillData.json');
 const serviceRequestData = require('./serviceRequestData.json');
 
+
+
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
