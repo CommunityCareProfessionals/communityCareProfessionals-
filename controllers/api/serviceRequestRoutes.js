@@ -5,6 +5,24 @@ const Skill = require('../../models/Skill');
 const Category = require('../../models/Category');
 const withAuth = require('../../utils/auth');
 
+router.post('/new', withAuth, async (req, res) => {
+  try {
+    console.log({
+      ...req.body,
+      consumer_id: req.session.user_id,
+    });
+    const newSR = await ServiceRequest.create({
+      ...req.body,
+      consumer_id: req.session.user_id,
+    });
+
+    res.status(200).json(newSR);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+});
+
 router.get('/', async (req, res) => {
   try {
     // Get all projects and JOIN with user data
@@ -75,11 +93,12 @@ router.get('/title', async (req, res) => {
       return category.get({ plain: true });
     });
 
-    console.log(categories);
+    console.log(categories[0].category_skills);
 
     res.render('service_title', {
       categories,
       top_categories: categories.slice(0, 3),
+      more_categories: categories.slice(3),
       logged_in: true,
     });
   } catch (err) {
