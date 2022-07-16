@@ -30,17 +30,29 @@
       <div class="form-group">
         <section>
           <input type="radio" id="provider-signup" name="type-signup" value="provider">
-          <label for="provider-signup">provider</label>&nbsp;
+          <label for="provider-signup">Provider</label>&nbsp;
           <input type="radio" id="consumer-signup" name="type-signup" value="consumer">
-          <label for="consumer-signup">consumer</label>
+          <label for="consumer-signup">Consumer</label>
           <div id="provider-services" style="display: none;">
             <label>Select A Category</label>
-              {{#each categories as |category|}}
+            <div class="form-group">
+              <input type="radio" id="interpersonal-cat" name="type-provider" value="interpersonal">
+              <label for="provider-intersonal">Interpersonal</label>&nbsp;
+              <input type="radio" id="legal-cat" name="type-provider" value="legal">
+              <label for="provider-legal">Legal and Advocacy</label>
+               <input type="radio" id="housing-cat" name="type-provider" value="housing">
+              <label for="provider-housing">Housing and Facilities</label>
+               <input type="radio" id="education-cat" name="type-provider" value="education">
+              <label for="provider-education">Education</label>
+               <input type="radio" id="lang-cat" name="type-provider" value="lang">
+              <label for="provider-language">Language and Culture</label>
+            </div>
+              {{!-- {{#each category }}
                 <input type="radio" id="{{id}}" name="provider_category" value="{{id}}">
                 <label for="{{id}}">{{name}}</label>
                 {{else}}
                 <p>EMPTY!</p>
-              {{/each}}
+              {{/each}} --}}
           </div>
         </section>
       </div><br>
