@@ -4,12 +4,21 @@ const { User } = require('../../models');
 router.post('/', async (req, res) => {
   try {
     console.log(req.body);
-    const userData = await User.create(req.body);
+    // commented out by TP for testing only
+    // const userData = await User.create(req.body);
+
+    // introduced by TP for testing only
+    const userData = await User.findOne({ where: { email: req.body.email } });
+
+    // Remove password before storing in session
+    delete userData.password; // alternatively, delete userData["password"]
+
     console.log(userData);
+
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-
+      req.session.user = userData.get({ plain: true });
       res.status(200).json(userData);
     });
   } catch (err) {
@@ -38,7 +47,7 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    // Remove password before sending back to profile
+    // Remove password before storing in session
     delete userData.password; // alternatively, delete userData["password"]
 
     req.session.save(() => {

@@ -55,7 +55,7 @@ router.get('/profile', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Project }], 
+      include: [{ model: Project }],
     });
 
     const user = userData.get({ plain: true });
@@ -102,10 +102,12 @@ router.get('/dashboard', withAuth, async (req, res) => {
       sr.get({ plain: true })
     );
 
-    console.log(serviceRequests);
+    console.log('user', req.session.user);
 
-    res.render('dashboard_temp', {
+    // customize handlebars based on user type
+    res.render('dashboard_' + req.session.user.type, {
       serviceRequests,
+      user: req.session.user,
       logged_in: true,
     });
   } catch (err) {
