@@ -1,25 +1,57 @@
-<!-- Loop over each object in the projects array -->
-{{!-- {{#each projects as |project| }}
-<div class="row mb-4 project">
-  <div class="col-md-5">
-    <h2>
-      <!-- Call helper function with triple brackets to render the emoji span as HTML -->
-      {{{get_emoji}}}
-      <a href="/project/{{project.id}}">{{project.name}}</a>
-    </h2>
-    <p>
-      <span for="img" aria-label="money">💲</span>
-      <!-- Pass needed_funding value to the helper function -->
-      <span class="dollar-amount">{{format_amount project.needed_funding}}</span>
-      needed!
-    </p>
-    <p>Created by {{project.user.name}} on {{format_date project.date_created}}</p>
-  </div>
-  <div class="col-md-7">
-    <p>
-      {{project.description}}
+<div class='row mb-4 project'>
+  <nav class='navbar navbar-expand-lg navbar-light bg-light'>
+    <a class='navbar-brand' href='#'><img
+        src='../images/Community Care.png'
+        width='80'
+        height='80'
+        class='d-inline-block align-top'
+        alt=''
+      /></a>
+    <button
+      class='navbar-toggler'
+      type='button'
+      data-toggle='collapse'
+      data-target='#navbarNav'
+      aria-controls='navbarNav'
+      aria-expanded='false'
+      aria-label='Toggle navigation'
+    >
+      <span class='navbar-toggler-icon'></span>
+    </button>
+    <div class='collapse navbar-collapse' id='navbarNav'>
+      <ul class='navbar-nav'>
+        {{#each top_categories as |cat|}}
+          <li class='nav-item @last active'>
+            <a class='nav-link text-lowercase' href='#'>{{cat.name}}
+              <span class='sr-only'>(current)</span></a>
+          </li>
+        {{/each}}
+        <li class='nav-item dropdown'>
+          <a
+            class='nav-link dropdown-toggle'
+            href='#'
+            id='navbarDropdownMenuLink'
+            data-toggle='dropdown'
+            aria-haspopup='true'
+            aria-expanded='false'
+          >
+            more
+          </a>
+          <div class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>
+            {{#each more_categories as |cat|}}
+              <a class='dropdown-item' href='#'>{{cat.name}}</a>
+            {{/each}}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+<div class='row mb-4 project'>
+  <div class='col-12'>
+    <p class='home-title'>
+      Uplift your community alive with
+      <strong>Care</strong>
     </p>
   </div>
 </div>
-{{/each}} --}}
-Welcome

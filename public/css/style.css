@@ -23,3 +23,11 @@ header,
   font-weight: bold;
   margin-left: -5px;
 }
+
+.home-title {
+  font-size: 50px;
+  letter-spacing: -0.035em;
+  line-height: 100%;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}

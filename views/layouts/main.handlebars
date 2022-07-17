@@ -19,7 +19,7 @@
   </head>
 
   <body>
-    <div class='flex-column justify-space-around'>
+    <div class='flex-column justify-space-around col-md-10'>
       <header class='display-flex justify-space-between align-center p-2'>
         <h3>
           <span role='img' aria-label='money'></span>
@@ -28,14 +28,14 @@
         <nav>
           <!-- Conditionally render login or logout links -->
           {{#if logged_in}}
-            <a href='/api/services/getting-started'>Post a Service Request</a>
+            <a href='/api/services/getting-started'>post a service request</a>
             |
             <a href='/profile'>profile</a>
             |
             <button class='no-button' id='logout'>logout</button>
           {{else}}
             <a href='/login'>login</a>
-            <a href='/signup'>Signup</a>
+            <a href='/signup'>signup</a>
           {{/if}}
         </nav>
       </header>
