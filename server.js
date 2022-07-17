@@ -26,6 +26,12 @@ const sess = {
 
 app.use(session(sess));
 
+//Allows you to access session objects from handlerbars template. Eg. {{session.user_id}}
+app.use(function (req, res, next) {
+  res.locals.session = req.session;
+  next();
+});
+
 // Inform Express.js on which template engine to use
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');

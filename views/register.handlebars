@@ -1,9 +1,9 @@
 <div class='row'>
   <div class='col-md-6 text-center'>
     {{#if isProvider}}
-      <h2>sign up as a service provider</h2>
+      <h2>sign up to help others</h2>
     {{else}}
-      <h2>sign up as a service consumer </h2>
+      <h2>sign up to ask for help </h2>
     {{/if}}
   </div>
 </div>
@@ -102,12 +102,17 @@
       <div class='form-group'>
         <button class='btn btn-primary' type='submit'>signup</button>
       </div>
-      <input type='hidden' name='type' id='type' value='{{type}}' />
+      <input
+        type='hidden'
+        name='type-signup'
+        id='type-signup'
+        value='{{type}}'
+      />
     </form>
   </div>
 </div>
 
-<script src='./js/login.js'></script>
+<script src='../../js/signup.js'></script>
 
 {{! <script>
   const provider = (event) => {

@@ -72,11 +72,15 @@ router.get('/profile', withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
 
+    console.log(user);
+
     res.render('profile', {
       ...user,
+      isProvider: user.type === 'provider',
       logged_in: true,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -133,6 +137,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     res.render('dashboard_' + req.session.user.type, {
       serviceRequests,
       user: req.session.user,
+      isProvider: req.session.user.type === 'provider',
       logged_in: true,
     });
   } catch (err) {

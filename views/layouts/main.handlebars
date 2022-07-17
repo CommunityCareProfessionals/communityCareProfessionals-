@@ -22,19 +22,10 @@
     <div class='flex-column justify-space-around col-md-10'>
       <header class='display-flex justify-space-between align-center p-2'>
         <h3>
-          <span role='img' aria-label='money'></span>
           <a href='/'>Community Care Professionals</a>
         </h3>
-        <nav class='flex-row'>
-          <!-- Conditionally render login or logout links -->
-          {{#if logged_in}}
-            <a
-              href='/api/services/getting-started'
-              class='nav-item nav-link'
-            >post a service request</a>
-            <a href='/profile'>profile</a>
-            <button class='no-button' id='logout'>logout</button>
-          {{else}}
+
+          {{!-- always display --}}
             <ul class='nav'>
               <li class='nav-item dropdown'>
                 <a
@@ -44,23 +35,39 @@
                   role='button'
                   aria-haspopup='true'
                   aria-expanded='false'
-                >Dropdown</a>
+                >learn</a>
                 <div class='dropdown-menu'>
-                  <a href='/whycare' class='dropdown-item'>why c-c pro</a>
-                  <a class='dropdown-item' href='#'>about us</a>
+                  <a class='dropdown-item' href='/whycare' >why c-c pro</a>
+                  <a class='dropdown-item' href='/aboutus'>about us</a>
+                  <a class='dropdown-item' href='/mission'mission</a>
                   <div class='dropdown-divider'></div>
                   <a class='dropdown-item' href='#'>contact us</a>
                 </div>
               </li>
-              <li class='nav-item'>
-                <a href='/login' class='nav-link'>login</a>
-              </li>
-              <li class='nav-item'>
-                <a href='/signup' class='nav-link'>signup</a>
-              </li>
+
+              {{!-- Conditionally render login or logout links --}}
+              {{#if logged_in}}
+              
+                {{#unless isProvider}}
+                  <li class='nav-item'>
+                    <a href='/api/services/getting-started' class='nav-item nav-link'>post a service request</a>
+                  </li>
+                {{/unless}}
+                <li class='nav-item'>
+                  <a href='/dashboard' class='nav-item nav-link'>dashboard</a>
+                </li>
+                <li class='nav-item'>
+                  <a href='#' class='nav-item nav-link' id='logout'>logout</button>
+                </li>
+              {{else}}
+                <li class='nav-item'>
+                  <a href='/login' class='nav-link'>login</a>
+                </li>
+                <li class='nav-item'>
+                  <a href='/signup' class='nav-link'>signup</a>
+                </li>
+              {{/if}}
             </ul>
-          {{/if}}
-        </nav>
       </header>
       <main class='container container-fluid mt-5'>
         <!-- Render the sub layout -->
