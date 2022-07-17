@@ -1,29 +1,41 @@
 const router = require('express').Router();
-const { Project, User } = require('../models');
-const ServiceRequest = require('../models/ServiceRequest');
+const {
+  Project,
+  User,
+  Category,
+  ServiceRequest,
+  SkillCategory,
+  Skill,
+} = require('../models');
+
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
-    const projectData = await Project.findAll({
+    const categoryData = await Category.findAll({
       include: [
         {
-          model: User,
-          attributes: ['first_name'],
+          model: Skill,
+          through: SkillCategory,
+          as: 'category_skills',
         },
       ],
     });
 
-    // Serialize data so the template can read it
-    const projects = projectData.map((project) => project.get({ plain: true }));
+    const categories = categoryData.map((category) => {
+      return category.get({ plain: true });
+    });
+
+    console.log(categories[0].category_skills);
 
     // Pass serialized data and session flag into template
     res.render('homepage', {
-      projects,
-      logged_in: req.session.logged_in,
+      categories,
+      top_categories: categories.slice(0, 3),
+      more_categories: categories.slice(3),
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });

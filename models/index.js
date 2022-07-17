@@ -51,13 +51,13 @@ Skill.belongsToMany(User, {
   as: 'skill_users',
 });
 
-Skill.hasMany(ServiceRequest, {
-  foreignKey: 'skill_id',
+SkillCategory.hasMany(ServiceRequest, {
+  foreignKey: 'category_skill_id',
   onDelete: 'CASCADE',
 });
 
-ServiceRequest.belongsTo(Skill, {
-  foreignKey: 'skill_id',
+ServiceRequest.belongsTo(SkillCategory, {
+  foreignKey: 'category_skill_id',
 });
 
 User.hasMany(ServiceRequest, {
@@ -80,4 +80,12 @@ ServiceRequest.belongsTo(User, {
   foreignKey: 'consumer_id',
 });
 
-module.exports = { User, Project, Category, Skill, UserSkill };
+module.exports = {
+  User,
+  Project,
+  Category,
+  Skill,
+  SkillCategory,
+  UserSkill,
+  ServiceRequest,
+};
