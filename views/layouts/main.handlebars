@@ -25,7 +25,7 @@
           <span role='img' aria-label='money'></span>
           <a href='/'>Community Care Professionals</a>
         </h3>
-        <nav class='nav flex-row'>
+        <nav class='flex-row'>
           <!-- Conditionally render login or logout links -->
           {{#if logged_in}}
             <a
@@ -35,9 +35,30 @@
             <a href='/profile'>profile</a>
             <button class='no-button' id='logout'>logout</button>
           {{else}}
-            <a href='/whycare' class='nav-item nav-link'>why c-c pro</a>
-            <a href='/login' class='nav-item nav-link'>login</a>
-            <a href='/signup' class='nav-item nav-link'>signup</a>
+            <ul class='nav'>
+              <li class='nav-item dropdown'>
+                <a
+                  class='nav-link dropdown-toggle'
+                  data-toggle='dropdown'
+                  href='#'
+                  role='button'
+                  aria-haspopup='true'
+                  aria-expanded='false'
+                >Dropdown</a>
+                <div class='dropdown-menu'>
+                  <a href='/whycare' class='dropdown-item'>why c-c pro</a>
+                  <a class='dropdown-item' href='#'>about us</a>
+                  <div class='dropdown-divider'></div>
+                  <a class='dropdown-item' href='#'>contact us</a>
+                </div>
+              </li>
+              <li class='nav-item'>
+                <a href='/login' class='nav-link'>login</a>
+              </li>
+              <li class='nav-item'>
+                <a href='/signup' class='nav-link'>signup</a>
+              </li>
+            </ul>
           {{/if}}
         </nav>
       </header>
