@@ -92,7 +92,20 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/signup', async (req, res) => {
-  res.render('signup');
+  res.render('role_selection');
+
+  console.log(req.session.logged_in, 'req.sess');
+  if (req.session.logged_in) {
+    res.redirect('/profile');
+    return;
+  }
+});
+
+router.get('/register', async (req, res) => {
+  res.render('register', {
+    isProvider: req.query.type === 'provider',
+    type: req.query.type,
+  });
 
   console.log(req.session.logged_in, 'req.sess');
   if (req.session.logged_in) {
