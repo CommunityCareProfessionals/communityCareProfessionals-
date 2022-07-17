@@ -25,17 +25,19 @@
           <span role='img' aria-label='money'></span>
           <a href='/'>Community Care Professionals</a>
         </h3>
-        <nav>
+        <nav class='nav flex-row'>
           <!-- Conditionally render login or logout links -->
           {{#if logged_in}}
-            <a href='/api/services/getting-started'>post a service request</a>
-            |
+            <a
+              href='/api/services/getting-started'
+              class='nav-item nav-link'
+            >post a service request</a>
             <a href='/profile'>profile</a>
-            |
             <button class='no-button' id='logout'>logout</button>
           {{else}}
-            <a href='/login'>login</a>
-            <a href='/signup'>signup</a>
+            <a href='/whycare' class='nav-item nav-link'>why c-c pro</a>
+            <a href='/login' class='nav-item nav-link'>login</a>
+            <a href='/signup' class='nav-item nav-link'>signup</a>
           {{/if}}
         </nav>
       </header>
