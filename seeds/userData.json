@@ -4,7 +4,7 @@
     "first_name": "Sal",
     "last_name": "Tal",
     "email": "sal@hotmail.com",
-    "type": "professional",
+    "type": "provider",
     "password": "password12345"
   },
   {
@@ -12,7 +12,7 @@
     "first_name": "Lernantino",
     "last_name": "Tarantino",
     "email": "lernantino@gmail.com",
-    "type": "professional",    
+    "type": "provider",    
     "password": "password12345"
   },
   {
@@ -20,7 +20,7 @@
     "first_name": "Amiko",
     "last_name": "Banto",
     "email": "amiko2k20@aol.com",
-    "type": "professional",    
+    "type": "provider",    
     "password": "password12345"
   },
   {

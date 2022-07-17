@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const ServiceRequest = require('../../models/ServiceRequest');
-const User = require('../../models/User');
-const Skill = require('../../models/Skill');
-const Category = require('../../models/Category');
+const { User, Skill, Category, SkillCategory } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/new', withAuth, async (req, res) => {
@@ -55,7 +53,7 @@ router.get('/getting-started', async (req, res) => {
       include: [
         { model: User, as: 'provider' },
         { model: User, as: 'consumer' },
-        { model: Skill },
+        { model: Skill, through: SkillCategory, as: 'service_request_skills' },
       ],
       where: {
         consumer_id: req.session.user.id,
@@ -68,10 +66,12 @@ router.get('/getting-started', async (req, res) => {
 
     res.render('service_getting_started', {
       user: req.session.user,
+      isProvider: req.session.user.type === 'provider',
       services,
       logged_in: true,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });

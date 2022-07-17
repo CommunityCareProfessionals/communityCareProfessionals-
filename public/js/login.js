@@ -14,41 +14,7 @@ const loginFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      // If successful, redirect the browser to the profile page
-      document.location.replace('/profile');
-    } else {
-      alert(response.statusText);
-      console.log('fail');
-    }
-  }
-};
-
-const signupFormHandler = async (event) => {
-  event.preventDefault();
-
-  const first_name = document.querySelector('#firstname-signup').value.trim();
-  const last_name = document.querySelector('#lastname-signup').value.trim();
-  const email = document.querySelector('#email-signup').value.trim();
-  const password = document.querySelector('#password-signup').value.trim();
-  const type = document.querySelector('input[name=type-signup]:checked').value;
-  // const cat = document.querySelector('input[name=type-provider]:checked').value;
-
-  console.log(first_name, last_name, email, password, type, 'signupdata');
-  if (first_name && last_name && email && password && type) {
-    const response = await fetch('/api/users', {
-      method: 'POST',
-      body: JSON.stringify({
-        first_name,
-        last_name,
-        email,
-        password,
-        type,
-      }),
-      headers: { 'Content-Type': 'application/json' },
-    });
-    console.log(response);
-
-    if (response.ok) {
+      // If successful, redirect the browser to the dashboard page
       document.location.replace('/dashboard');
     } else {
       alert(response.statusText);
@@ -61,14 +27,4 @@ if (document.querySelector('.login-form')) {
   document
     .querySelector('.login-form')
     .addEventListener('submit', loginFormHandler);
-}
-
-// document
-//   .querySelector('.login-form')
-//   .addEventListener('submit', loginFormHandler);
-
-if (document.querySelector('.signup-form')) {
-  document
-    .querySelector('.signup-form')
-    .addEventListener('submit', signupFormHandler);
 }

@@ -20,7 +20,6 @@ Category.belongsToMany(Skill, {
     model: SkillCategory,
     unique: true,
   },
-  // Define an alias for when data is retrieved
   as: 'category_skills',
 });
 
@@ -29,7 +28,6 @@ Skill.belongsToMany(Category, {
     model: SkillCategory,
     unique: true,
   },
-  // Define an alias for when data is retrieved
   as: 'skill_categories',
 });
 
@@ -38,8 +36,7 @@ User.belongsToMany(Skill, {
     model: UserSkill,
     unique: true,
   },
-  // Define an alias for when data is retrieved
-  as: 'user_skills',
+  as: 'provider_skills',
 });
 
 Skill.belongsToMany(User, {
@@ -47,17 +44,7 @@ Skill.belongsToMany(User, {
     model: UserSkill,
     unique: true,
   },
-  // Define an alias for when data is retrieved
-  as: 'skill_users',
-});
-
-SkillCategory.hasMany(ServiceRequest, {
-  foreignKey: 'category_skill_id',
-  onDelete: 'CASCADE',
-});
-
-ServiceRequest.belongsTo(SkillCategory, {
-  foreignKey: 'category_skill_id',
+  as: 'skill_providers',
 });
 
 User.hasMany(ServiceRequest, {
@@ -78,6 +65,42 @@ User.hasMany(ServiceRequest, {
 ServiceRequest.belongsTo(User, {
   as: 'consumer',
   foreignKey: 'consumer_id',
+});
+
+Skill.belongsToMany(ServiceRequest, {
+  through: {
+    model: SkillCategory,
+    foreignKey: 'category_skill_id',
+    unique: true,
+  },
+  as: 'skill_service_requests',
+});
+
+ServiceRequest.belongsToMany(Skill, {
+  through: {
+    model: SkillCategory,
+    foreignKey: 'category_skill_id',
+    unique: true,
+  },
+  as: 'service_request_skills',
+});
+
+Category.belongsToMany(ServiceRequest, {
+  through: {
+    model: SkillCategory,
+    foreignKey: 'category_skill_id',
+    unique: true,
+  },
+  as: 'category_service_requests',
+});
+
+ServiceRequest.belongsToMany(Category, {
+  through: {
+    model: SkillCategory,
+    foreignKey: 'category_skill_id',
+    unique: true,
+  },
+  as: 'service_request_categories',
 });
 
 module.exports = {
