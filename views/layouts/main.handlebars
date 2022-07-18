@@ -12,6 +12,7 @@
       integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm'
       crossorigin='anonymous'
     />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
     <link rel='stylesheet' href='/css/jass.css' />
     <link rel='stylesheet' href='/css/style.css' />
@@ -21,9 +22,13 @@
   <body>
     <div class='flex-column justify-space-around col-md-10'>
       <header class='display-flex justify-space-between align-center p-2'>
-        <h3>
+        <div class="justtify-content-start display-flex align-items-center">
+        <a class='navbar-brand' href='#'><img src='../images/Community Care.png' width='75' height='75' 
+        class='d-inline-block align-top' alt=''/></a>
+        <h3 class="text-dark">
           <a href='/'>Community Care Professionals</a>
         </h3>
+        </div>
 
           {{!-- always display --}}
             <ul class='nav'>
@@ -35,13 +40,13 @@
                   role='button'
                   aria-haspopup='true'
                   aria-expanded='false'
-                >learn</a>
+                >Learn</a>
                 <div class='dropdown-menu'>
-                  <a class='dropdown-item' href='/whycare' >why c-c pro</a>
-                  <a class='dropdown-item' href='/aboutus'>about us</a>
-                  <a class='dropdown-item' href='/mission'mission</a>
+                  <a class='dropdown-item' href='/whycare' >Why C-C Pro</a>
+                  <a class='dropdown-item' href='/aboutus'>About Us</a>
+                  <a class='dropdown-item' href='/mission'Mission</a>
                   <div class='dropdown-divider'></div>
-                  <a class='dropdown-item' href='#'>contact us</a>
+                  <a class='dropdown-item' href='#'>Contact Us</a>
                 </div>
               </li>
 
@@ -50,21 +55,21 @@
               
                 {{#unless isProvider}}
                   <li class='nav-item'>
-                    <a href='/api/services/getting-started' class='nav-item nav-link'>post a service request</a>
+                    <a href='/api/services/getting-started' class='nav-item nav-link'>Post a Service Request</a>
                   </li>
                 {{/unless}}
                 <li class='nav-item'>
-                  <a href='/dashboard' class='nav-item nav-link'>dashboard</a>
+                  <a href='/dashboard' class='nav-item nav-link'>Dashboard</a>
                 </li>
                 <li class='nav-item'>
-                  <a href='#' class='nav-item nav-link' id='logout'>logout</button>
+                  <a href='#' class='nav-item nav-link' id='logout'>Logout</button>
                 </li>
               {{else}}
                 <li class='nav-item'>
-                  <a href='/login' class='nav-link'>login</a>
+                  <a href='/login' class='nav-link'>Login</a>
                 </li>
                 <li class='nav-item'>
-                  <a href='/signup' class='nav-link'>signup</a>
+                  <a href='/signup' class='nav-link'>Signup</a>
                 </li>
               {{/if}}
             </ul>

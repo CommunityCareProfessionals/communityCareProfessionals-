@@ -2,9 +2,20 @@
   --btn-bg-disabled: #d5e0d5;
 }
 
-header,
-.project:not(:last-child) {
+header
+/* .project:not(:last-child)  */
+{
   border-bottom: 1px solid #ccc;
+}
+
+h3 {
+  color: black;
+}
+
+section {
+  background-image: url('../images/Nature.jpeg');
+  background-size: 1000px;
+  background-color: #ccc;
 }
 
 .no-button {
@@ -18,7 +29,7 @@ header,
 }
 
 .no-button:hover {
-  color: #065b83;
+  color: #068345;
   text-decoration: underline;
 }
 
