@@ -1,12 +1,12 @@
-<div class='row mb-4 project'>
+{{!-- <div class='row mb-4 project'>
   <nav class='navbar navbar-expand-lg navbar-light bg-light'>
-    <a class='navbar-brand' href='#'><img
+    {{!-- <a class='navbar-brand' href='#'><img
         src='../images/Community Care.png'
         width='120'
         height='120'
         class='d-inline-block align-top'
         alt=''
-      /></a>
+      /></a> --}}
     <button
       class='navbar-toggler'
       type='button'
@@ -46,34 +46,124 @@
       </ul>
     </div>
   </nav>
-</div>
-<div class='row mb-4 project'>
-  <div class='col-12'>
-    <p class='home-title'>
-      Uplift your community with
-      <strong>Care</strong>
-    </p>
-  </div>
-</div>
-<div class='row mb-4 project'>
-  <div class='col-4 p-3 mb-2 bg-info text-white'>
-    <p class='home-title'>
-      We all hit a
-      <strong>snag</strong>
-      in life
-    </p>
-  </div>
-  <div class='col-4'>
-    <p class='home-title'>
-      That
-      <strong>help</strong>ing hand is within reach
-    </p>
-  </div>
-  <div class='col-4 p-3 mb-2 bg-info text-white'>
-    <p class='home-title'>
-      We will help you
+</div> --}}
+<section>
+<div class='row mb-4 project text-white'>
+  <div class='col-12 align-content-center' style="display: block;">
+    <h1 class='home-title'>
+      Extrodinary Outcome
+      {{!-- Uplift your community with
+      <strong>Care</strong> --}}
+    </h1>
+    {{!-- <div class='row mb-4 project'> --}}
+    <div class='col-4 p-3 mb-2 bg-info text-white'>
+    {{!-- <h1 class='home-title'> --}}
+      Uplift you community with Care. We all hit a
+      snag in life. A helping hand is within reach.
+    {{!-- </h1> --}}
+    </div>
+    </div>
+  <div class='col-4' style="display: none;">
+    <h1 class='home-title'>
+      Exceptionally Effective
+      {{!-- That
+      <strong>help</strong>ing hand is within reach --}}
+    </h1>
+  {{!-- </div> --}}
+    <div class='col-4 p-3 mb-2 bg-info text-white'>
+    {{!-- <p class='home-title'> --}}
+      Community Care will help you
       <strong>find</strong>
-      'em
-    </p>
+      what you need.
+    </div>
+    </div>
   </div>
+</section>
+
+<div class='row mb-4 project'>
+  <nav class='navbar navbar-expand-lg navbar-light bg-light'>
+    {{!-- <a class='navbar-brand' href='#'><img
+        src='../images/Community Care.png'
+        width='120'
+        height='120'
+        class='d-inline-block align-top'
+        alt=''
+      /></a> --}}
+    <button
+      class='navbar-toggler'
+      type='button'
+      data-toggle='collapse'
+      data-target='#navbarNav'
+      aria-controls='navbarNav'
+      aria-expanded='false'
+      aria-label='Toggle navigation'
+    >
+      <span class='navbar-toggler-icon'></span>
+    </button>
+    <div class='collapse navbar-collapse' id='navbarNav'>
+      <ul class='navbar-nav'>
+        <li class="nav-item">
+          <i class="fa-solid fa-people-group"></i>
+          <a class='nav-link text-lowercase' href='#'>Interpersonal
+            <span class="fa-solid fa-people-group"</span></a>
+          </a>
+        </li>
+        <li class="nav-item">
+          <i class="fa-solid fa-gavel"></i>
+          <a class='nav-link text-lowercase' href='#'>Legal and Advocacy</a>
+        </li>
+        <li class="nav-item">
+          <i class="fa-solid fa-house-chimney"></i>
+          <a class='nav-link text-lowercase' href='#'>Housing and Facilities</a>
+        </li>
+        <li class="nav-item">
+          <i class="fa-solid fa-book-open"></i>
+          <a class='nav-link text-lowercase' href='#'>Education and Literacy</a>
+        </li>
+        <li class="nav-item">
+          <i class="fa-solid fa-earth-americas"></i>
+          <a class='nav-link text-lowercase' href='#'>Language and Culture</a>
+        </li>
+        {{!-- {{#each top_categories as |cat|}} --}}
+          {{!-- <li class='nav-item @last active'>
+            <a class='nav-link text-lowercase' href='#'>{{cat.name}}
+              <span class='sr-only'>(current)</span></a>
+          </li> --}}
+        {{!-- {{/each}} --}}
+        {{!-- <li class='nav-item dropdown'>
+          <a
+            class='nav-link dropdown-toggle'
+            href='#'
+            id='navbarDropdownMenuLink'
+            data-toggle='dropdown'
+            aria-haspopup='true'
+            aria-expanded='false'
+          >
+            more
+          </a>
+          <div class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>
+            {{#each more_categories as |cat|}}
+              <a class='dropdown-item' href='#'>{{cat.name}}</a>
+            {{/each}}
+          </div>
+        </li> --}}
+      </ul>
+    </div>
+  </nav>
 </div>
+
+{{!-- <script>
+var text = ["Welcome", "Hi", "Sup dude"];
+var counter = 0;
+var elem = document.getElementById("changeText");
+var inst = setInterval(change, 1000);
+
+function change() {
+  elem.innerHTML = text[counter];
+  counter++;
+  if (counter >= text.length) {
+    counter = 0; --}}
+    {{!-- // clearInterval(inst); // uncomment this if you want to stop refreshing after one cycle --}}
+  {{!-- }
+} --}}
+{{!-- </script> --}}
