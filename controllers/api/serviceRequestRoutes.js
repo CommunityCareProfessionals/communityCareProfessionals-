@@ -77,8 +77,6 @@ router.get('/getting-started', async (req, res) => {
 });
 
 router.get('/title', async (req, res) => {
-  console.log('query count', req.query.count);
-
   try {
     const categoryData = await Category.findAll({
       include: [
@@ -107,13 +105,42 @@ router.get('/title', async (req, res) => {
   }
 });
 
+router.get('/publishskill', async (req, res) => {
+  try {
+    const categoryData = await Category.findAll({
+      include: [
+        {
+          model: Skill,
+          as: 'category_skills',
+        },
+      ],
+    });
+
+    const categories = categoryData.map((category) => {
+      return category.get({ plain: true });
+    });
+
+    console.log(categories[0].category_skills);
+
+    res.render('service_publish_skill', {
+      categories,
+      top_categories: categories.slice(0, 3),
+      more_categories: categories.slice(3),
+      logged_in: true,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 router.get('/:id', async (req, res) => {
   try {
     const serviceData = await ServiceRequest.findByPk(req.params.id, {
       include: [
         { model: User, as: 'provider' },
         { model: User, as: 'consumer' },
-        { model: Skill },
+        { model: Skill, through: SkillCategory, as: 'service_request_skills' },
       ],
     });
 
