@@ -51,7 +51,7 @@
               </li>
 
               {{!-- Conditionally render login or logout links --}}
-              {{#if logged_in}}
+              {{#if session.logged_in}}
               
                 {{#unless isProvider}}
                   <li class='nav-item'>
@@ -84,7 +84,7 @@
     </div>
 
     <!-- Render script for logged in users only -->
-    {{#if logged_in}}
+    {{#if session.logged_in}}
       <script src='/js/logout.js'></script>
     {{/if}}
 
