@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
       return category.get({ plain: true });
     });
 
-    console.log(categories[0].category_skills);
+    console.log(categories);
 
     // Pass serialized data and session flag into template
     res.render('homepage', {
@@ -87,12 +87,17 @@ router.get('/profile', withAuth, async (req, res) => {
 
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
-    res.redirect('/profile');
-    return;
-  }
+  try {
+    if (req.session.logged_in) {
+      res.redirect('/dashboard');
+      return;
+    }
 
-  res.render('login');
+    res.render('login');
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 router.get('/signup', async (req, res) => {
@@ -100,7 +105,7 @@ router.get('/signup', async (req, res) => {
 
   console.log(req.session.logged_in, 'req.sess');
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    res.redirect('/dashboard');
     return;
   }
 });
@@ -113,7 +118,7 @@ router.get('/register', async (req, res) => {
 
   console.log(req.session.logged_in, 'req.sess');
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    res.redirect('/dashboard');
     return;
   }
 });
