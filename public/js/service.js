@@ -11,29 +11,62 @@ const newOrExistingServiceHandler = (event) => {
 };
 
 const gettingStartedContinueHandler = async (e) => {
-  if (document.querySelector('#new_service_radio').checked) {
-    document.location.replace('/api/services/title');
+  const isProvider = e.target.getAttribute('data-type');
+
+  if (isProvider) {
+    if (document.querySelector('#publish_skill_radio').checked) {
+      document.location.replace('/api/services/publishskill');
+    } else if (
+      document.querySelector('#select_service_request_radio').checked
+    ) {
+      document.location.replace('/api/services/selectservicerequest');
+    } else {
+      document.location.replace(
+        '/api/services/' +
+          document.querySelector('#existing-service-to-edit').value
+      );
+    }
   } else {
-    document.location.replace(
-      '/api/services/' +
-        document.querySelector('#existing-service-to-edit').value
-    );
+    if (document.querySelector('#new_service_radio').checked) {
+      document.location.replace('/api/services/title');
+    } else {
+      document.location.replace(
+        '/api/services/' +
+          document.querySelector('#existing-service-to-edit').value
+      );
+    }
   }
 };
 
-const titleChangeHandler = async (event) => {
+const titleChangeHandler = (e) => {
+  const isProvider = e.target.getAttribute('data-type');
   var new_service_title_text = document.querySelector('#new_service_title');
 
   // after a word is entered, hide examples and show categories
-  if (
-    new_service_title_text.value &&
-    new_service_title_text.value.indexOf(' ') >= 0
-  ) {
-    document.querySelector('#choose_category_fieldset').style.display = 'block';
-    document.querySelector('#title_examples').style.display = 'none';
+  if (isProvider) {
+    if (
+      new_service_title_text.value &&
+      new_service_title_text.value.indexOf(' ') >= 0
+    ) {
+      document.querySelector('#choose_category_fieldset').style.display =
+        'block';
+    } else {
+      document.querySelector('#choose_category_fieldset').style.display =
+        'none';
+    }
   } else {
-    document.querySelector('#choose_category_fieldset').style.display = 'none';
-    document.querySelector('#title_examples').style.display = 'block';
+    if (
+      new_service_title_text.value &&
+      new_service_title_text.value.indexOf(' ') >= 0
+    ) {
+      document.querySelector('#choose_category_fieldset').style.display =
+        'block';
+      document.querySelector('#title_examples').style.display = 'none';
+    } else {
+      document.querySelector('#choose_category_fieldset').style.display =
+        'none';
+      document.querySelector('#title_examples').style.display = 'block';
+    }
   }
 };
 
