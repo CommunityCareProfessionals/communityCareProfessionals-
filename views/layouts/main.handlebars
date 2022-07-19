@@ -22,11 +22,16 @@
     <div class='flex-column justify-space-around col-md-10'>
       <header class='display-flex justify-space-between align-center p-2'>
         <div class="justtify-content-start display-flex align-items-center">
-        <a class='navbar-brand' href='#'><img src='../images/Community Care.png' width='75' height='75' 
+        <a class='navbar-brand' href='#'><img src='/images/Community Care.png' width='75' height='75' 
         class='d-inline-block align-top' alt=''/></a>
-        <h3 class="text-dark">
-          <a href='/'>Community Care Professionals</a>
-        </h3>
+        <div class="d-flex flex-column">
+          <h3 class="text-dark">
+            <a href='/'>Community Care Professionals</a>
+          </h3><br/>
+          <h6 class="text-dark">
+            <a href='/'>{{user.first_name}} {{user.last_name}}</a>
+          </h6>
+        </div>
         </div>
 
           {{!-- always display --}}
