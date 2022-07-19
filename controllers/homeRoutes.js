@@ -151,4 +151,15 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
+router.get('/aboutus', async (req, res) => {
+    res.render('about_us')
+
+});
+
+
+router.get('/whycare', async (req,res) => {
+  res.render('why_care')
+
+});
+
 module.exports = router;

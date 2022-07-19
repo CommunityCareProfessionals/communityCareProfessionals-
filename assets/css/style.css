@@ -10,6 +10,12 @@ body {
     background-color: #d9dcd6;
 }
 
+footer p {
+    font-size: .2px;
+    border-top: 4px solid black;
+
+}
+
 .container {
     display: flex;
     align-items: center;
