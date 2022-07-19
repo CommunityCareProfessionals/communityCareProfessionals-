@@ -1,23 +1,27 @@
 <div class='row mt-4'>
   <div class='col-md-6'>
     <H1>Great! What skills are you looking to offer?</H1>
+
     <br />
     <div>
       <fieldset
         id='choose_category_fieldset'
         style='display: block; flex-direction: column'
+
       >
         {{! <div id='choose_categories' class='mt-25'> }}
         <div class='mb-10'><h3>Select Category</h3></div>
 
         {{#each top_categories}}
+
           <div>
+
             <input
               type='radio'
               id='{{id}}'
               name='request_category'
               value='{{id}}'
-              class='mb-2'
+              class='mb-2 ml-2'
               onclick='displaySkillsHandler(this)'
               data-level='page'
               data-name='{{name}}'
@@ -47,15 +51,19 @@
           </fieldset>
         {{/each}}
         {{! </div> }}
+
         <div class='ml-3'>
           <a id='see_all_categories_btn' href='#'><strong>more...</strong></a>
+
         </div>
       </fieldset>
     </div>
   </div>
 </div>
+
 <div class='row mt-5'>
   <div class='col-md-6'>
+
     <div>
       <button
         type='submit'
