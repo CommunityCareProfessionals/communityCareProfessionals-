@@ -2,25 +2,25 @@
   {
     "id": 1,
     "name": "Sally_neworking_1",
-    "description": "Sally_neworking_1",
+    "description": "Lorem ipsum dolor sit amet, erant probatus molestiae vix ut, usu nullam insolens ad. Et ferri habemus lucilius quo. His no graeco quodsi, at mea ludus euripidis, his sapientem gloriatur at.",
     "provider_id": 1,
     "consumer_id": 4,
-    "category_skill_id": 1
+    "skillcategory_id": 1
   },
   {
     "id": 2,
     "name": "Martin_litigation_1",
-    "description": "Martin_litigation_1",
+    "description": "Lorem ipsum dolor sit amet, erant probatus molestiae vix ut, usu nullam insolens ad. Et ferri habemus lucilius quo. His no graeco quodsi, at mea ludus euripidis, his sapientem gloriatur at.",
     "provider_id": 2,
     "consumer_id": 5,
-    "category_skill_id": 5
+    "skillcategory_id": 5
   },
   {
     "id": 3,
     "name": "Montana_Electrical_1",
-    "description": "Montana_Electrical_1",
+    "description": "Duo id scaevola fabellas, sed te solum viderer. Id per modo novum labitur, brute minimum per ut. Ea qui melius lobortis, ut eos tritani periculis. Legere vocent est ut, dicunt iisque deseruisse at usu.",
     "provider_id": 3,
     "consumer_id": 6,
-    "category_skill_id": 7
+    "skillcategory_id": 7
   }
 ]

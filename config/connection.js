@@ -13,7 +13,17 @@ if (process.env.JAWSDB_URL) {
     {
       host: 'localhost',
       dialect: 'mysql',
-      port: 3306
+      port: 3306,
+      query: {
+        raw: false,
+      },
+      logging: true,
+      // dialectOptions: {
+      //   // useUTC: false, //for reading from database
+      //   dateStrings: true,
+      //   typeCast: true,
+      // },
+      timezone: '-05:00', //for writing to database
     }
   );
 }

@@ -11,16 +11,10 @@ UserSkill.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    skill_date: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      comment:
-        'When user acquired this skill. Used to determine years of experience',
-    },
-    skill_id: {
+    skillcategory_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'skill',
+        model: 'skillcategory',
         key: 'id',
         unique: false,
       },

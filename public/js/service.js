@@ -11,7 +11,7 @@ const newOrExistingServiceHandler = (event) => {
 };
 
 const gettingStartedContinueHandler = async (e) => {
-  const isProvider = e.target.getAttribute('data-type');
+  const isProvider = e.target.getAttribute('data-type') == 'provider';
 
   if (isProvider) {
     if (document.querySelector('#publish_skill_radio').checked) {
@@ -94,6 +94,9 @@ displaySkillsHandler = (radioBtn) => {
 };
 
 handleSkillSelection = (radioBtn) => {
+  // enable Continue button
+  document.querySelector('#continue_title_btn').disabled = false;
+
   document.querySelector('#selectedSkill').textContent =
     radioBtn.getAttribute('data-name');
   document
@@ -102,6 +105,26 @@ handleSkillSelection = (radioBtn) => {
   document
     .querySelector('#selectedSkill')
     .setAttribute('data-skill_name', radioBtn.getAttribute('data-name'));
+
+  if (document.querySelector('#selectedSkill').textContent) {
+    document.querySelector('#selectedSkillWrapper').style.display = 'block';
+  } else {
+    document.querySelector('#selectedSkillWrapper').style.display = 'none';
+  }
+};
+
+handleSkillSelection_provider = (checkBox) => {
+  // enable Continue button
+  document.querySelector('#continue_publish_skill_btn').disabled = false;
+
+  document.querySelector('#selectedSkill').textContent =
+    checkBox.getAttribute('data-name');
+  document
+    .querySelector('#selectedSkill')
+    .setAttribute('data-category_skill_id', checkBox.getAttribute('data-id'));
+  document
+    .querySelector('#selectedSkill')
+    .setAttribute('data-skill_name', checkBox.getAttribute('data-name'));
 
   if (document.querySelector('#selectedSkill').textContent) {
     document.querySelector('#selectedSkillWrapper').style.display = 'block';
@@ -142,6 +165,41 @@ submitServiceRequest = async () => {
       alert('Failed to create service request');
     }
   }
+};
+
+publishSkillHandler = async () => {
+  const category_skill_id = document
+    .querySelector('#selectedSkill')
+    .getAttribute('data-category_skill_id');
+  const category_name = document
+    .querySelector('#selectedSkill')
+    .getAttribute('data-category_name');
+  const skill_name = document
+    .querySelector('#selectedSkill')
+    .getAttribute('data-skill_name');
+
+  if (category_skill_id && category_name && skill_name) {
+    const response = await fetch(`/api/services/publishskill`, {
+      method: 'POST',
+      body: JSON.stringify({
+        category_skill_id,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      gotoDashboard();
+    } else {
+      alert(await response.json().message);
+    }
+  }
+};
+
+const enableGettingStartedContinueBtn = (e) => {
+  // enable Continue button
+  document.querySelector('#continue_getting_started_btn').disabled = false;
 };
 
 const gotoTitle = (e) => {
@@ -196,6 +254,18 @@ if (document.querySelector('#continue_title_btn')) {
   document
     .querySelector('#continue_title_btn')
     .addEventListener('click', submitServiceRequest);
+}
+
+if (document.querySelector('#continue_publish_skill_btn')) {
+  document
+    .querySelector('#continue_publish_skill_btn')
+    .addEventListener('click', publishSkillHandler);
+}
+
+if (document.querySelector('#back_publish_skill_btn')) {
+  document
+    .querySelector('#back_publish_skill_btn')
+    .addEventListener('click', gotoGettingStarted);
 }
 
 function datetimestamp() {

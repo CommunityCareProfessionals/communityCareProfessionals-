@@ -6,6 +6,7 @@ const {
   ServiceRequest,
   SkillCategory,
   Skill,
+  UserSkill,
 } = require('../models');
 
 const withAuth = require('../utils/auth');
@@ -21,6 +22,8 @@ router.get('/', async (req, res) => {
         },
       ],
     });
+
+    console.log('categoryData', categoryData);
 
     const categories = categoryData.map((category) => {
       return category.get({ plain: true });
@@ -125,24 +128,77 @@ router.get('/register', async (req, res) => {
 
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
-    const serviceRequestData = await ServiceRequest.findAll({
-      where: {
-        consumer_id: req.session.user_id,
+    const find_options = {
+      attributes: {
+        exclude: [
+          'provider_id',
+          'consumer_id',
+          'skillcategory_id',
+          'date_requested',
+        ],
       },
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          attributes: { exclude: ['password'] },
+          include: [
+            {
+              model: SkillCategory,
+              as: 'provider_skills',
+              through: UserSkill,
+              include: [{ model: Skill }, { model: Category }],
+            },
+          ],
+        },
+        { model: User, as: 'consumer', attributes: { exclude: 'password' } },
+      ],
+    };
+
+    if (req.session.isProvider) {
+      find_options.where = {
+        provider_id: req.session.user.id,
+      };
+    } else {
+      find_options.where = {
+        consumer_id: req.session.user.id,
+      };
+    }
+
+    // Find an existing service based on the logged in user
+    const serviceData = await ServiceRequest.findAll(find_options);
+
+    const serviceRequests = serviceData.map((service) => {
+      let sr = service.get({ plain: true });
+
+      return {
+        id: sr.id,
+        name: sr.name,
+        service_date: sr.service_date,
+        description: sr.description,
+        provider: sr.provider,
+        consumer: sr.consumer,
+      };
     });
+    console.log('serviceRequests: ', serviceRequests);
+    // console.log(
+    //   'provider skills: ',
+    //   serviceRequests[0].provider.provider_skills[0]
+    // );
 
-    const serviceRequests = serviceRequestData.map((sr) =>
-      sr.get({ plain: true })
-    );
-
-    console.log('user', req.session.user);
+    // console.log(
+    //   'provider skill: ',
+    //   serviceRequests[0].provider.provider_skills[0].skill
+    // );
+    // console.log(
+    //   'provider skill category: ',
+    //   serviceRequests[0].provider.provider_skills[0].category
+    // );
 
     // customize handlebars based on user type
     res.render('dashboard_' + req.session.user.type, {
-      serviceRequests,
+      services: serviceRequests,
       user: req.session.user,
-      isProvider: req.session.user.type === 'provider',
       logged_in: true,
     });
   } catch (err) {
