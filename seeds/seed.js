@@ -1,8 +1,12 @@
 const sequelize = require('../config/connection');
-const { User, Category, Skill, UserSkill } = require('../models');
-
-const SkillCategory = require('../models/SkillCategory');
-const ServiceRequest = require('../models/ServiceRequest');
+const {
+  User,
+  Category,
+  Skill,
+  UserSkill,
+  SkillCategory,
+  ServiceRequest,
+} = require('../models');
 
 const userData = require('./userData.json');
 const categoryData = require('./catData.json');
@@ -10,8 +14,6 @@ const skillData = require('./skillData.json');
 const skillCategoryData = require('./skillCategoryData.json');
 const userSkillData = require('./userSkillData.json');
 const serviceRequestData = require('./serviceRequestData.json');
-
-
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });

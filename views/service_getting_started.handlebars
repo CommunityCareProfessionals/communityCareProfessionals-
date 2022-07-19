@@ -5,16 +5,17 @@
     </header>
   </div>
 </div>
-{{#if isProvider}}
+{{#if session.isProvider}}
   <div class='row mt-4'>
     <div class='col-md-6'>
       <p>What would you like to do?</p>
-      <section>
+      <div>
         <input
           type='radio'
           id='publish_skill_radio'
           name='service_getting_started'
           value='new'
+          onclick='enableGettingStartedContinueBtn(this)'
         />
         <label for='html'>Publish your skills</label><br /><br />
         <input
@@ -22,6 +23,7 @@
           id='select_service_request_radio'
           name='service_getting_started'
           value='new'
+          onclick='enableGettingStartedContinueBtn(this)'
         />
         <label for='html'>Help someone complete a service request</label><br
         /><br />
@@ -30,6 +32,7 @@
           id='existing_service_radio'
           name='service_getting_started'
           value='existing'
+          onclick='enableGettingStartedContinueBtn(this)'
         />
         <label for='html'>Update an existing service request you are working on</label>
         <div id='existing-services' class='mt-5' style='display: none;'>
@@ -40,12 +43,12 @@
             {{/each}}
           </select>
         </div>
-      </section>
+      </div>
     </div>
   </div>
   <div class='row mt-4'>
     <div class='col-md-6'>
-      <section>
+      <div>
         <button
           type='submit'
           class='btn btn-primary mr-3'
@@ -56,20 +59,22 @@
           class='btn btn-primary ml-3'
           data-type='provider'
           id='continue_getting_started_btn'
+          disabled='disabled'
         >Continue</button>
-      </section>
+      </div>
     </div>
   </div>
 {{else}}
   <div class='row mt-4'>
     <div class='col-md-6'>
       <p>What would you like to do?</p>
-      <section>
+      <div>
         <input
           type='radio'
           id='new_service_radio'
           name='service_getting_started'
           value='new'
+          onclick='enableGettingStartedContinueBtn(this)'
         />
         <label for='html'>Create a new service request</label><br /><br />
         <input
@@ -77,6 +82,7 @@
           id='existing_service_radio'
           name='service_getting_started'
           value='existing'
+          onclick='enableGettingStartedContinueBtn(this)'
         />
         <label for='html'>Update an existing request</label>
         <div id='existing-services' class='mt-5' style='display: none;'>
@@ -87,12 +93,12 @@
             {{/each}}
           </select>
         </div>
-      </section>
+      </div>
     </div>
   </div>
   <div class='row mt-4'>
     <div class='col-md-6'>
-      <section>
+      <div>
         <button
           type='submit'
           class='btn btn-primary mr-3'
@@ -103,8 +109,9 @@
           class='btn btn-primary ml-3'
           data-type='consumer'
           id='continue_getting_started_btn'
+          disabled='disabled'
         >Continue</button>
-      </section>
+      </div>
     </div>
   </div>
 {{/if}}

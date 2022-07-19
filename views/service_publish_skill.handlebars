@@ -1,17 +1,19 @@
 <div class='row mt-4'>
   <div class='col-md-6'>
     <H1>Great! What skills are you looking to offer?</H1>
-    <section>
+    <br />
+    <div>
       <fieldset
         id='choose_category_fieldset'
-        style='display: block; flex-direction: column; border: 1pt red solid'
+        style='display: block; flex-direction: column'
       >
         {{! <div id='choose_categories' class='mt-25'> }}
-        <div><strong>Select Category</strong></div>
+        <div class='mb-10'><h3>Select Category</h3></div>
+
         {{#each top_categories}}
-          <div style='border: 1pt red solid'>
+          <div>
             <input
-              type='checkbox'
+              type='radio'
               id='{{id}}'
               name='request_category'
               value='{{id}}'
@@ -24,18 +26,18 @@
           </div>
           <fieldset
             style='display: none;'
-            class='ml-5'
+            class='ml-3'
             name='category_skills'
             id='category_skills_page{{id}}'
             data-level='page'
           >
             {{#each category_skills}}
-              <div class='mr-5' id='service_skills'>
+              <div class='mr-3' id='service_skills'>
                 <input
-                  type='checkbox'
+                  type='radio'
                   name='service_skill'
                   id='{{id}}'
-                  onclick='handleSkillSelection(this)'
+                  onclick='handleSkillSelection_provider(this)'
                   data-id='{{id}}'
                   data-name='{{name}}'
                 />
@@ -45,27 +47,28 @@
           </fieldset>
         {{/each}}
         {{! </div> }}
-        <div class='mr-5' style='border: 1pt red solid'>
-          <a id='see_all_categories_btn' href='#'>more</a>
+        <div class='ml-3'>
+          <a id='see_all_categories_btn' href='#'><strong>more...</strong></a>
         </div>
       </fieldset>
-    </section>
+    </div>
   </div>
 </div>
-<div class='row'>
+<div class='row mt-5'>
   <div class='col-md-6'>
-    <section>
+    <div>
       <button
         type='submit'
         class='btn btn-primary mr-3'
-        id='back_title_btn'
+        id='back_publish_skill_btn'
       >Back</button>
       <button
         type='submit'
         class='btn btn-primary ml-3'
-        id='continue_title_btn'
+        id='continue_publish_skill_btn'
+        disabled='disabled'
       >Continue</button>
-    </section>
+    </div>
   </div>
 </div>
 <div id='selectedSkillWrapper' class='mt-5' style='display: none;'>
@@ -86,11 +89,11 @@
     {{#each more_categories}}
       <div>
         <input
-          type='checkbox'
+          type='radio'
           id='{{id}}'
           name='request_category'
           value='{{id}}'
-          class='mb-2 mt-5'
+          class='mb-2 mt-1'
           onclick='displaySkillsHandler(this)'
           data-level='modal'
           data-name='{{name}}'
@@ -99,18 +102,18 @@
       </div>
       <fieldset
         style='display: none;'
-        class='ml-5'
+        class='ml-3'
         name='category_skills'
         id='category_skills_modal{{id}}'
         data-level='modal'
       >
         {{#each category_skills}}
-          <div class='mr-5' id='service_skills'>
+          <div class='mr-3' id='service_skills'>
             <input
-              type='checkbox'
+              type='radio'
               name='service_skill'
               id='{{id}}'
-              onclick='handleSkillSelection(this)'
+              onclick='handleSkillSelection_provider(this)'
               data-id='{{id}}'
               data-name='{{name}}'
             />
@@ -120,14 +123,14 @@
       </fieldset>
     {{/each}}
     <br />
-    <section>
+    <div>
       <button
         type='submit'
         class='btn btn-primary mr-3'
         id='modal_close'
         onclick='modal.style.display = "none"'
       >Close</button>
-    </section>
+    </div>
   </div>
 </div>
 

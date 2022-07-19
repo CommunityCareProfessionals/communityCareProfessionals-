@@ -43,13 +43,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-sequelize
-  .sync({
-    alter: process.env.ENVIRONMENT == 'Dev',
-    force: process.env.ENVIRONMENT == 'Dev-Rebuild',
-  })
-  .then(() => {
-    app.listen(PORT, () =>
-      console.log(`Now listening (env: ${process.env.ENVIRONMENT})...`)
-    );
-  });
+const sync_options = {
+  alter: process.env.ENVIRONMENT == 'dev',
+  force: process.env.ENVIRONMENT == 'dev-rebuild',
+};
+
+sequelize.sync(sync_options).then(() => {
+  app.listen(PORT, () =>
+    console.log(
+      `${new Date()} Now listening (env: ${
+        process.env.ENVIRONMENT
+      })...sync_options: ${JSON.stringify(sync_options)}`
+    )
+  );
+});

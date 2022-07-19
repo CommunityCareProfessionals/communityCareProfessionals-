@@ -2,7 +2,7 @@
   <div class='row mt-4'>
     <div class='col-md-6'>
       <p><strong>Submit a title for your request</strong></p>
-      <section>
+      <div>
         <div class='mb-20'>
           <textarea
             rows='1'
@@ -11,7 +11,6 @@
             style='height: 47px; overflow: hidden'
           ></textarea>
         </div>
-        <br />
         <br />
         <div id='title_examples' class='mt-25' style='display: block;'>
           <strong>Example titles</strong>
@@ -25,8 +24,8 @@
           id='choose_category_fieldset'
           style='display: none; flex-direction: column'
         >
-          <div id='choose_categories' class='mt-25'>
-            <div><strong>Select Category</strong></div>
+          <div id='choose_categories' class='mt-25 mb-2'>
+            <div class='mb-2'><strong>Select Category</strong></div>
             {{#each top_categories}}
               <div>
                 <input
@@ -34,7 +33,7 @@
                   id='{{id}}'
                   name='request_category'
                   value='{{id}}'
-                  class='mb-2 mt-5'
+                  class='mb-2 mt-1'
                   onclick='displaySkillsHandler(this)'
                   data-level='page'
                   data-name='{{name}}'
@@ -43,13 +42,13 @@
               </div>
               <fieldset
                 style='display: none;'
-                class='ml-5'
+                class='ml-3'
                 name='category_skills'
                 id='category_skills_page{{id}}'
                 data-level='page'
               >
                 {{#each category_skills}}
-                  <div class='mr-5' id='service_skills'>
+                  <div class='mr-3' id='service_skills'>
                     <input
                       type='radio'
                       name='service_skill'
@@ -65,16 +64,16 @@
             {{/each}}
           </div>
           <br />
-          <div class='mt-3'>
-            <a id='see_all_categories_btn' href='#'>more</a>
+          <div class='mt-1'>
+            <a id='see_all_categories_btn' href='#'><strong>more...</strong></a>
           </div>
         </fieldset>
-      </section>
+      </div>
     </div>
   </div>
   <div class='row mt-4'>
     <div class='col-md-6'>
-      <section>
+      <div>
         <button
           type='submit'
           class='btn btn-primary mr-3'
@@ -84,8 +83,9 @@
           type='submit'
           class='btn btn-primary ml-3'
           id='continue_title_btn'
+          disabled='disabled'
         >Continue</button>
-      </section>
+      </div>
     </div>
   </div>
   <div id='selectedSkillWrapper' class='mt-5' style='display: none;'>
@@ -140,14 +140,14 @@
         </fieldset>
       {{/each}}
       <br />
-      <section>
+      <div>
         <button
           type='submit'
           class='btn btn-primary mr-3'
           id='modal_close'
           onclick='modal.style.display = "none"'
         >Close</button>
-      </section>
+      </div>
     </div>
   </div>
 </div>

@@ -1,6 +1,12 @@
 const router = require('express').Router();
 const ServiceRequest = require('../../models/ServiceRequest');
-const { User, Skill, Category, SkillCategory } = require('../../models');
+const {
+  User,
+  Skill,
+  Category,
+  SkillCategory,
+  UserSkill,
+} = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/new', withAuth, async (req, res) => {
@@ -15,6 +21,20 @@ router.post('/new', withAuth, async (req, res) => {
     });
 
     res.status(200).json(newSR);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+});
+
+router.post('/publishskill', withAuth, async (req, res) => {
+  try {
+    const newUserSkill = await UserSkill.create({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
+
+    res.status(200).json(newUserSkill);
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
@@ -48,28 +68,85 @@ router.get('/', async (req, res) => {
 
 router.get('/getting-started', async (req, res) => {
   try {
-    // Find an existing service based on the logged in user
-    const serviceData = await ServiceRequest.findAll({
-      include: [
-        { model: User, as: 'provider' },
-        { model: User, as: 'consumer' },
-        { model: Skill, through: SkillCategory, as: 'service_request_skills' },
-      ],
-      where: {
-        consumer_id: req.session.user.id,
+    const find_options = {
+      attributes: {
+        exclude: [
+          'provider_id',
+          'consumer_id',
+          'skillcategory_id',
+          'date_requested',
+        ],
       },
-    });
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          attributes: { exclude: ['password'] },
+          include: [
+            {
+              model: SkillCategory,
+              as: 'provider_skills',
+              through: UserSkill,
+              include: [{ model: Skill }, { model: Category }],
+            },
+          ],
+        },
+        { model: User, as: 'consumer', attributes: { exclude: 'password' } },
+      ],
+    };
 
-    const services = serviceData.map((service) => {
-      return service.get({ plain: true });
-    });
+    if (req.session.isProvider) {
+      find_options.where = {
+        provider_id: req.session.user.id,
+      };
+    } else {
+      find_options.where = {
+        consumer_id: req.session.user.id,
+      };
+    }
 
-    res.render('service_getting_started', {
+    // Find an existing service based on the logged in user
+    const serviceData = await ServiceRequest.findAll(find_options);
+
+    const serviceRequests = serviceData.map((service) => {
+      let sr = service.get({ plain: true });
+
+      return {
+        provider: sr.provider,
+        consumer: sr.consumer,
+        id: sr.id,
+        name: sr.name,
+        service_date: sr.service_date,
+        description: sr.description,
+      };
+    });
+    const render_options = {
       user: req.session.user,
-      isProvider: req.session.user.type === 'provider',
-      services,
+      services: serviceRequests,
       logged_in: true,
-    });
+    };
+
+    if (req.session.isProvider) {
+      const userSkillData = await User.findAll({
+        include: [
+          { model: SkillCategory, through: UserSkill, as: 'provider_skills' },
+          { model: Skill, through: SkillCategory, as: 'provider_skills' },
+        ],
+        where: {
+          id: req.session.user.id,
+        },
+      });
+
+      const userSkills = userSkillData.map((service) => {
+        return service.get({ plain: true });
+      });
+
+      render_options.userskill = userSkills;
+
+      console.log('render_options', render_options);
+    }
+
+    res.render('service_getting_started', render_options);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
