@@ -172,12 +172,12 @@ router.get('/dashboard', withAuth, async (req, res) => {
       let sr = service.get({ plain: true });
 
       return {
-        provider: sr.provider,
-        consumer: sr.consumer,
         id: sr.id,
         name: sr.name,
         service_date: sr.service_date,
         description: sr.description,
+        provider: sr.provider,
+        consumer: sr.consumer,
       };
     });
     console.log('serviceRequests: ', serviceRequests);
@@ -197,7 +197,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
     // customize handlebars based on user type
     res.render('dashboard_' + req.session.user.type, {
-      serviceRequests,
+      services: serviceRequests,
       user: req.session.user,
       logged_in: true,
     });
