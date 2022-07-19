@@ -50,17 +50,19 @@
 <section>
 <div class='row mb-4 project text-white'>
   <div class='col-12 align-content-center' style="display: block;">
-    <h1 class='home-title'>
+    <h1 class='home-title d-flex justify-content-center'>
       Extraordinary Outcome
       {{!-- Uplift your community with
       <strong>Care</strong> --}}
     </h1>
     {{!-- <div class='row mb-4 project'> --}}
-    <div class='col-4 p-3 mb-2 bg-info text-white'>
+    <div>
+     <div class='col-4 p-3 mb-5 bg-info text-white'>
     {{!-- <h1 class='home-title'> --}}
       Uplift your community with Care. We all hit a
       snag in life. A helping hand is within reach.
     {{!-- </h1> --}}
+    </div>
     </div>
     </div>
   <div class='col-4' style="display: none;">
@@ -80,50 +82,38 @@
   </div>
 </section>
 
-<div class='row mb-4 project'>
-  <nav class='navbar navbar-expand-lg navbar-light bg-light'>
-    {{!-- <a class='navbar-brand' href='#'><img
-        src='../images/Community Care.png'
-        width='120'
-        height='120'
-        class='d-inline-block align-top'
-        alt=''
-      /></a> --}}
-    <button
-      class='navbar-toggler'
-      type='button'
-      data-toggle='collapse'
-      data-target='#navbarNav'
-      aria-controls='navbarNav'
-      aria-expanded='false'
-      aria-label='Toggle navigation'
-    >
-      <span class='navbar-toggler-icon'></span>
-    </button>
-    <div class='collapse navbar-collapse' id='navbarNav'>
-      <ul class='navbar-nav'>
+<div class='mb-4'>
+  <nav class='navbar navbar-expand-lg navbar-light bg-light justify-content-center'>
+  <div class="justify-content-center">
+    <div class='collapse navbar-collapse justify-content-center' id='navbarNav'>
+      <ul class='navbar-nav justify-content-center'>
         <li class="nav-item">
-          <i class="fa-solid fa-people-group"></i>
-          <a class='nav-link text-lowercase' href='#'>Interpersonal
-            <span class="fa-solid fa-people-group"</span></a>
-          </a>
+          <a class='navbar-brand align-items-center' href='#'><img src='../images/interpersonnal.png' width='50' height='50' 
+          class='d-inline-block align-top align-center ml-4' alt=''/></a>
+          <a class='nav-link' href='#'>Interpersonal</a>
+        </li>
+        <li class="nav-item ml-4">
+          <a class='navbar-brand' href='#'><img src='../images/law.png' width='50' height='50' 
+          class='d-inline-block align-top align-center ml-4' alt=''/></a>
+           <a class='nav-link' href='#'>Legal and Advocacy</a>
         </li>
         <li class="nav-item">
-          <i class="fa-solid fa-gavel"></i>
-          <a class='nav-link text-lowercase' href='#'>Legal and Advocacy</a>
+          <a class='navbar-brand' href='#'><img src='../images/home.png' width='50' height='50' 
+          class='d-inline-block align-top ml-4' alt=''/></a>
+          <a class='nav-link' href='#'>Housing and Facilities</a>
         </li>
         <li class="nav-item">
-          <i class="fa-solid fa-house-chimney"></i>
-          <a class='nav-link text-lowercase' href='#'>Housing and Facilities</a>
+          <a class='navbar-brand' href='#'><img src='../images/books.png' width='50' height='50' 
+          class='d-inline-block align-top ml-4' alt=''/></a>
+          <a class='nav-link' href='#'>Education and Literacy</a>
         </li>
         <li class="nav-item">
-          <i class="fa-solid fa-book-open"></i>
-          <a class='nav-link text-lowercase' href='#'>Education and Literacy</a>
+          <a class='navbar-brand' href='#'><img src='../images/culture.png' width='50' height='50' 
+          class='d-inline-block align-top ml-4' alt=''/></a>
+          <a class='nav-link' href='#'>Language and Culture</a>
         </li>
-        <li class="nav-item">
-          <i class="fa-solid fa-earth-americas"></i>
-          <a class='nav-link text-lowercase' href='#'>Language and Culture</a>
-        </li>
+
+       
         {{!-- {{#each top_categories as |cat|}} --}}
           {{!-- <li class='nav-item @last active'>
             <a class='nav-link text-lowercase' href='#'>{{cat.name}}
