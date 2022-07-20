@@ -1,4 +1,3 @@
-
 <div class='row mt-4'>
   <div class='col-md-6'>
     <header>
@@ -18,32 +17,15 @@
           value='new'
           onclick='enableGettingStartedContinueBtn(this)'
         />
-        <label for='html'>Publish your skills</label><br /><br />
+        <label for='html'>Publish/Update your skills</label><br /><br />
         <input
           type='radio'
-          id='select_service_request_radio'
+          id='match_service_radio'
           name='service_getting_started'
           value='new'
           onclick='enableGettingStartedContinueBtn(this)'
         />
-        <label for='html'>Help someone complete a service request</label><br
-        /><br />
-        <input
-          type='radio'
-          id='existing_service_radio'
-          name='service_getting_started'
-          value='existing'
-          onclick='enableGettingStartedContinueBtn(this)'
-        />
-        <label for='html'>Update an existing service request you are working on</label>
-        <div id='existing-services' class='mt-5' style='display: none;'>
-          <select name='existing-service-to-edit' id='existing-service-to-edit'>
-            {{!only show when the existing request radio button is selected. Otherwise, hide}}
-            {{#each services}}
-              <option value='{{id}}'>{{name}}</option>
-            {{/each}}
-          </select>
-        </div>
+        <label for='html'>Help someone complete a service request</label><br />
       </div>
     </div>
   </div>

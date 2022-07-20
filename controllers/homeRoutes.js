@@ -127,6 +127,8 @@ router.get('/register', async (req, res) => {
 });
 
 router.get('/dashboard', withAuth, async (req, res) => {
+  let provider_skill;
+
   try {
     const find_options = {
       attributes: {
@@ -159,6 +161,23 @@ router.get('/dashboard', withAuth, async (req, res) => {
       find_options.where = {
         provider_id: req.session.user.id,
       };
+
+      provider_skill = await User.findOne({
+        where: { id: req.session.user.id },
+        attributes: { exclude: ['password'] },
+        include: [
+          {
+            model: SkillCategory,
+            as: 'provider_skills',
+            through: UserSkill,
+            include: [{ model: Skill }, { model: Category }],
+          },
+        ],
+      });
+
+      provider_skill = provider_skill.get({ plain: true }).provider_skills[0];
+
+      console.log('provider_skill', provider_skill);
     } else {
       find_options.where = {
         consumer_id: req.session.user.id,
@@ -180,24 +199,22 @@ router.get('/dashboard', withAuth, async (req, res) => {
         consumer: sr.consumer,
       };
     });
+
     console.log('serviceRequests: ', serviceRequests);
-    // console.log(
-    //   'provider skills: ',
-    //   serviceRequests[0].provider.provider_skills[0]
-    // );
+    console.log('isProvider: ', req.session.isProvider);
 
-    // console.log(
-    //   'provider skill: ',
-    //   serviceRequests[0].provider.provider_skills[0].skill
-    // );
-    // console.log(
-    //   'provider skill category: ',
-    //   serviceRequests[0].provider.provider_skills[0].category
-    // );
+    let render_uri = 'dashboard_' + req.session.user.type;
 
+    if (req.session.isProvider && provider_skill) {
+      render_uri += '_with_skill';
+      req.session.provider_skill = provider_skill;
+    }
+
+    console.log('render_uri', render_uri);
     // customize handlebars based on user type
-    res.render('dashboard_' + req.session.user.type, {
+    res.render(render_uri, {
       services: serviceRequests,
+      provider_skill,
       user: req.session.user,
       logged_in: true,
     });
@@ -208,14 +225,11 @@ router.get('/dashboard', withAuth, async (req, res) => {
 });
 
 router.get('/aboutus', async (req, res) => {
-    res.render('about_us')
-
+  res.render('about_us');
 });
 
-
-router.get('/whycare', async (req,res) => {
-  res.render('why_care')
-
+router.get('/whycare', async (req, res) => {
+  res.render('why_care');
 });
 
 module.exports = router;

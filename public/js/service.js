@@ -16,10 +16,8 @@ const gettingStartedContinueHandler = async (e) => {
   if (isProvider) {
     if (document.querySelector('#publish_skill_radio').checked) {
       document.location.replace('/api/services/publishskill');
-    } else if (
-      document.querySelector('#select_service_request_radio').checked
-    ) {
-      document.location.replace('/api/services/selectservicerequest');
+    } else if (document.querySelector('#match_service_radio').checked) {
+      document.location.replace('/api/services/match');
     } else {
       document.location.replace(
         '/api/services/' +
@@ -134,7 +132,7 @@ handleSkillSelection_provider = (checkBox) => {
 };
 
 submitServiceRequest = async () => {
-  const category_skill_id = document
+  const skillcategory_id = document
     .querySelector('#selectedSkill')
     .getAttribute('data-category_skill_id');
   const category_name = document
@@ -146,11 +144,11 @@ submitServiceRequest = async () => {
 
   const description = document.querySelector('#new_service_title').value;
 
-  if (category_skill_id && category_name && skill_name && description) {
+  if (skillcategory_id && category_name && skill_name && description) {
     const response = await fetch(`/api/services/new`, {
       method: 'POST',
       body: JSON.stringify({
-        category_skill_id,
+        skillcategory_id,
         description,
         name: category_name + '_' + skill_name + '_' + datetimestamp(),
       }),
@@ -168,7 +166,7 @@ submitServiceRequest = async () => {
 };
 
 publishSkillHandler = async () => {
-  const category_skill_id = document
+  const skillcategory_id = document
     .querySelector('#selectedSkill')
     .getAttribute('data-category_skill_id');
   const category_name = document
@@ -178,11 +176,11 @@ publishSkillHandler = async () => {
     .querySelector('#selectedSkill')
     .getAttribute('data-skill_name');
 
-  if (category_skill_id && category_name && skill_name) {
+  if (skillcategory_id && category_name && skill_name) {
     const response = await fetch(`/api/services/publishskill`, {
       method: 'POST',
       body: JSON.stringify({
-        category_skill_id,
+        skillcategory_id,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -195,6 +193,10 @@ publishSkillHandler = async () => {
       alert(await response.json().message);
     }
   }
+};
+
+gotoMatchServiceRequest = (e) => {
+  document.location.replace('/api/services/match');
 };
 
 const enableGettingStartedContinueBtn = (e) => {
@@ -267,6 +269,12 @@ if (document.querySelector('#back_publish_skill_btn')) {
     .querySelector('#back_publish_skill_btn')
     .addEventListener('click', gotoGettingStarted);
 }
+
+// if (document.querySelector('#match_service_radio')) {
+//   document
+//     .querySelector('#match_service_radio')
+//     .addEventListener('click', gotoMatchServiceRequest);
+// }
 
 function datetimestamp() {
   var today = new Date();

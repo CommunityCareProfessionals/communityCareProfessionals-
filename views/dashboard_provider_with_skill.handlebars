@@ -4,29 +4,7 @@
       <div class='row'>
         <div class='mb-5'>
           <h2 class='text-left'>Hey
-            {{user.first_name}}! Ready for an opportunity to server?</h2>
-        </div>
-      </div>
-      <div class='row'>
-        <div>
-          <p class='text-left'><i class='fas fa-regular fa-user'></i>
-            Answer a few questions to start building your profile</p>
-        </div>
-      </div>
-      <hr />
-      <div class='row'>
-        <div>
-          <p class='text-left'>
-            <i class='fas fa-regular fa-clock'></i>
-            Sit and wait while we find you an opportunity to serve</p>
-        </div>
-      </div>
-      <hr />
-      <div class='row'>
-        <div>
-          <p class='text-left'>
-            <i class='fas fa-solid fa-people-group'></i>Collaborate and team up
-            with other professionals on bigger projects (Coming soon!)</p>
+            {{user.first_name}}! Thank you for a willingness to serve</h2>
         </div>
       </div>
       {{#if services}}
@@ -50,6 +28,16 @@
             {{/each}}
           </div>
         {{/each}}
+      {{else if provider_skill}}
+        <h3>Your registered skill</h3>
+        <button
+          class='btn btn-warning'
+          style='cursor: none;'
+        >{{provider_skill.category.name}}/{{provider_skill.skill.name}}</button>
+        <br />
+        <br />
+        <button class='btn btn-primary' id='update_existing_skill_btn'>Next step</button>
+
       {{else}}
         <div class='row'>
           <button

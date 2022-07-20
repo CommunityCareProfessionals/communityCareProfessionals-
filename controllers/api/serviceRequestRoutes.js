@@ -17,6 +17,7 @@ router.post('/new', withAuth, async (req, res) => {
     });
     const newSR = await ServiceRequest.create({
       ...req.body,
+      status: 'new',
       consumer_id: req.session.user_id,
     });
 
@@ -29,6 +30,9 @@ router.post('/new', withAuth, async (req, res) => {
 
 router.post('/publishskill', withAuth, async (req, res) => {
   try {
+    await UserSkill.destroy({
+      where: { user_id: req.session.user_id },
+    });
     const newUserSkill = await UserSkill.create({
       ...req.body,
       user_id: req.session.user_id,
@@ -43,7 +47,6 @@ router.post('/publishskill', withAuth, async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
     const serviceData = await ServiceRequest.findAll({
       include: [
         { model: User, as: 'provider' },
@@ -52,10 +55,40 @@ router.get('/', async (req, res) => {
       ],
     });
 
-    // Serialize data so the template can read it
     const services = serviceData.map((service) => service.get({ plain: true }));
 
-    // Pass serialized data and session flag into template
+    res.render('services', {
+      services,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get('/match', async (req, res) => {
+  try {
+    const serviceData = await ServiceRequest.findAll({
+      where: {
+        skillcategory_id: req.session.provider_skill.skill_id,
+        provider_id: null,
+      },
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          required: false,
+          attributes: { exclude: ['password'] },
+        },
+        { model: User, as: 'consumer', attributes: { exclude: ['password'] } },
+      ],
+    });
+
+    const services = serviceData.map((service) => service.get({ plain: true }));
+
+    console.log('services', services);
+
     res.render('services', {
       services,
       logged_in: req.session.logged_in,
@@ -121,30 +154,10 @@ router.get('/getting-started', async (req, res) => {
       };
     });
     const render_options = {
-      user: req.session.user,
       services: serviceRequests,
+      user: req.session.user,
       logged_in: true,
     };
-
-    if (req.session.isProvider) {
-      const userSkillData = await User.findAll({
-        include: [
-          { model: SkillCategory, through: UserSkill, as: 'provider_skills' },
-          { model: Skill, through: SkillCategory, as: 'provider_skills' },
-        ],
-        where: {
-          id: req.session.user.id,
-        },
-      });
-
-      const userSkills = userSkillData.map((service) => {
-        return service.get({ plain: true });
-      });
-
-      render_options.userskill = userSkills;
-
-      console.log('render_options', render_options);
-    }
 
     res.render('service_getting_started', render_options);
   } catch (err) {
