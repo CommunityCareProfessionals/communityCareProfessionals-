@@ -27,16 +27,37 @@
   <body>
     <div class='flex-column justify-space-around col-md-10'>
       <header class='display-flex justify-space-between align-center p-2'>
-        <div class="justtify-content-start display-flex align-items-center">
+        <div class="justify-content-start display-flex align-items-center">
+        <div class="cols-md-3">
         <a class='navbar-brand' href='#'><img src='/images/Community Care.png' width='75' height='75' 
         class='d-inline-block align-top' alt=''/></a>
+        </div>
         <div class="d-flex flex-column">
-          <h3 class="text-dark">
-            <a href='/'>Community Care Professionals</a>
-          </h3><br/>
-          <h6 class="text-dark">
-            <a href='/'>{{user.first_name}} {{user.last_name}}</a>
-          </h6>
+          <div class="cols-md-6">
+            <h3 class="text-dark">
+              <a href='/'>Community Care Professionals</a>
+            </h3>
+          </div>
+          {{#unless session.isDemo}}
+          <div class="cols-md-4">
+            <h6 class="text-dark">
+              <a href='/'>{{user.first_name}} {{user.last_name}}</a>
+            </h6>
+          </div>
+          {{else}}
+
+              <span class="cols-md-5 text-warning bg-dark ml=6">DEMO MODE</span>
+              <div class="cols-md-7">
+                <select id="pick_demo_user_dropdown" class="form-select-sm w-50">
+                  <option selected>Pick demo user</option>
+                  {{#each session.demo_users}}
+                    <option data-email="{{email}}" data-password="password12345" value="{{id}}" {{#eq user.id id}} selected {{/eq}}>{{{first_name}}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <span>Currently logged in as: <strong>{{session.user.first_name}}</strong></span>
+          {{/unless}}
+
         </div>
         </div>
 
@@ -97,6 +118,10 @@
     <!-- Render script for logged in users only -->
     {{#if session.logged_in}}
       <script src='/js/logout.js'></script>
+    {{/if}}
+    {{#if session.isDemo}}
+      <script src='../../js/login.js'></script>    
+      <script src='../../js/demo.js'></script>
     {{/if}}
     <script
       src='https://code.jquery.com/jquery-3.2.1.slim.min.js'

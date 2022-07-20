@@ -1,0 +1,24 @@
+<div class='row'>
+  <div class='col-md-8'>
+    <div class='mb-5'>
+      <div class='row'>
+        <div class='mb-5'>
+          <h2 class='text-left'>Hey
+            {{user.first_name}} {{user.last_name}}! Boss, you are in charge</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-4 d-flex justify-content-end'>
+      <label type='button' class='btn btn-primary btn-xl' style="background-color: rgb(202, 97, 97) !important;" onclick="switchDemoMode(this)" data-role="admin">
+        <div class="row d-flex justify-content-end mb-3">
+          <input type="checkbox" id="demo_mode" name="demo_mode" class="mr-1" style="width: 20px; height: 20px" {{#if session.isDemo}} checked="checked"{{/if}}></input>
+        </div>
+        <div class="row d-flex">
+          <h1>Demo Mode</h1>
+        </div>
+      </label>
+  </div>
+</div>
+
+<script src='../../js/admin.js'></script>

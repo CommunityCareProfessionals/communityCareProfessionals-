@@ -46,6 +46,13 @@ User.init(
       unique: false,
       comment: 'Is user a consumer or a professional',
     },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'user',
+      unique: false,
+      comment: 'currently used for admin and non-admin',
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,

@@ -4,6 +4,7 @@
     "first_name": "Sal",
     "last_name": "Tal",
     "email": "sal@hotmail.com",
+    "role": "user",
     "type": "provider",
     "password": "password12345"
   },
@@ -12,6 +13,7 @@
     "first_name": "Lernantino",
     "last_name": "Tarantino",
     "email": "lernantino@gmail.com",
+    "role": "user",
     "type": "provider",    
     "password": "password12345"
   },
@@ -20,6 +22,7 @@
     "first_name": "Amiko",
     "last_name": "Banto",
     "email": "amiko2k20@aol.com",
+    "role": "user",
     "type": "provider",    
     "password": "password12345"
   },
@@ -36,6 +39,7 @@
     "first_name": "Martin",
     "last_name": "Nango",
     "email": "martin@gmail.com",
+    "role": "user",
     "type": "consumer",    
     "password": "password12345"
   },
@@ -44,6 +48,7 @@
     "first_name": "Montana",
     "last_name": "Nino",
     "email": "montana@aol.com",
+    "role": "user",
     "type": "consumer",    
     "password": "password12345"
   },  
@@ -52,7 +57,53 @@
     "first_name": "noservice",
     "last_name": "provider",
     "email": "noserviceprovider@aol.com",
+    "role": "user",
     "type": "provider",    
+    "password": "password12345"
+  },  
+  {
+    "id": 8,
+    "first_name": "admin",
+    "last_name": "ninja",
+    "email": "admin@superpower.com",
+    "role": "admin",   
+    "type": "admin",
+    "password": "password12345"
+  },  
+  {
+    "id": 9,
+    "first_name": "demo-provider-no-skill",
+    "last_name": "alpha",
+    "email": "demo-provider-no-skill@demo.com",
+    "role": "demo",   
+    "type": "provider",
+    "password": "password12345"
+  },  
+  {
+    "id": 10,
+    "first_name": "demo-provider-with-skill",
+    "last_name": "beta",
+    "email": "demo-provider-with-skill@demo.com",
+    "role": "demo",   
+    "type": "provider",
+    "password": "password12345"
+  },  
+  {
+    "id": 11,
+    "first_name": "demo-consumer-no-sr",
+    "last_name": "alpha",
+    "email": "demo-consumer-no-sr@demo.com",
+    "role": "demo",   
+    "type": "consumer",
+    "password": "password12345"
+  },  
+  {
+    "id": 12,
+    "first_name": "demo-consumer-with-sr",
+    "last_name": "beta",
+    "email": "demo-consumer-with-sr@demo.com",
+    "role": "demo",   
+    "type": "consumer",
     "password": "password12345"
   }
 ]
