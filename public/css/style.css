@@ -12,13 +12,50 @@ h3 {
   color: black;
 }
 
-
-
 section {
   background-image: url('../images/Nature.jpeg');
   background-size: 1000px;
   background-color: #ccc;
 }
+
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border-bottom :3px solid #43b17a;
+  background-color: white;
+  color: black
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  color: #43b17a;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  color: #43b17a;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
 
 .no-button {
   background: none;
