@@ -100,3 +100,7 @@ section {
   /* --disabled-bg: var(--btn-bg-disabled);
   border-color: var(--disabled-bg); */
 }
+
+#card-service {
+  background-color: #43b17a;
+}
