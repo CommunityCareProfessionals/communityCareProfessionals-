@@ -1,0 +1,43 @@
+          {{!-- always display --}}
+            <ul class='nav'>
+              <li class='nav-item dropdown'>
+                <a
+                  class='nav-link dropdown-toggle'
+                  data-toggle='dropdown'
+                  href='#'
+                  role='button'
+                  aria-haspopup='true'
+                  aria-expanded='false'
+                >Learn</a>
+                <div class='dropdown-menu'>
+                  <a class='dropdown-item' href='/whycare' >Why C-C Pro</a>
+                  <a class='dropdown-item' href='/aboutus'>About Us</a>
+                  <a class='dropdown-item' href='/mission'Mission</a>
+                  <div class='dropdown-divider'></div>
+                  <a class='dropdown-item' href='#'>Contact Us</a>
+                </div>
+              </li>
+
+              {{!-- Conditionally render login or logout links --}}
+              {{#if session.logged_in}}
+              
+                {{#unless session.isProvider}}
+                  <li class='nav-item'>
+                    <a href='/api/services/getting-started' class='nav-item nav-link'>Post a Service Request</a>
+                  </li>
+                {{/unless}}
+                <li class='nav-item'>
+                  <a href='/dashboard' class='nav-item nav-link'>Dashboard</a>
+                </li>
+                <li class='nav-item'>
+                  <a href='#' class='nav-item nav-link' id='logout'>Logout</a>
+                </li>
+              {{else}}
+                <li class='nav-item'>
+                  <a href='/login' class='nav-link'>Login</a>
+                </li>
+                <li class='nav-item'>
+                  <a href='/signup' class='nav-link'>Signup</a>
+                </li>
+              {{/if}}
+            </ul>

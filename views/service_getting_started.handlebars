@@ -18,14 +18,17 @@
           onclick='enableGettingStartedContinueBtn(this)'
         />
         <label for='html'>Publish/Update your skills</label><br /><br />
-        <input
-          type='radio'
-          id='match_service_radio'
-          name='service_getting_started'
-          value='new'
-          onclick='enableGettingStartedContinueBtn(this)'
-        />
-        <label for='html'>Help someone complete a service request</label><br />
+        {{#if session.provider_skill}}
+          <input
+            type='radio'
+            id='match_service_radio'
+            name='service_getting_started'
+            value='new'
+            onclick='enableGettingStartedContinueBtn(this)'
+          />
+          <label for='html'>Help someone complete a service request</label><br
+          />
+        {{/if}}
       </div>
     </div>
   </div>

@@ -52,11 +52,27 @@ router.post('/login', async (req, res) => {
     // Remove password before storing in session
     delete userData.password; // alternatively, delete userData["password"]
 
+    if (process.env.isDemo) {
+      const demoUsersData = User.findAll({ where: { role: 'demo' } });
+      const demoUsers = (await demoUsersData).map((user) => {
+        user = user.get({ plain: true });
+        delete user.password;
+        return user;
+      });
+
+      req.session.demo_users = demoUsers;
+
+      console.log('demoUsers: ', demoUsers);
+    }
+
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
       req.session.isProvider = userData.type === 'provider';
+      req.session.isAdmin = userData.role === 'admin';
       req.session.user = userData.get({ plain: true });
+      req.session.isDemo = process.env.isDemo === 'true';
+      req.session.demo_users = req.session.demo_users;
 
       res.json({ user: userData, message: 'You are now logged in!' });
     });

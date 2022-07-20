@@ -7,36 +7,37 @@
             {{user.first_name}}! Thank you for a willingness to serve</h2>
         </div>
       </div>
+
       {{#if services}}
-        {{#each services}}
-          <div class='card p-3' style='width: 20rem;'>
-            <div class='card-body'>
-              <h5 class='card-title'>{{name}}</h5>
-              <p class='card-text'>{{description}}</p>
-              <a
-                href='#'
-                id='edit_service_commitment'
-                class='btn btn-primary'
-              >Edit service commitment</a>
-            </div>
-          </div>
-
-          <div class='row'>
-            {{#each provider.provider_skills}}
-              {{skill.name}}
-            {{/each}}
-          </div>
-        {{/each}}
-      {{else if provider_skill}}
-        <h3>Your registered skill</h3>
-        <button
-          class='btn btn-warning'
-          style='cursor: none;'
-        >{{provider_skill.category.name}}/{{provider_skill.skill.name}}</button>
+        <div class='row d-flex'>
+          {{#each services}}
+            <div class='card p-3' style='width: 20rem;'>
+              <div class='card-body'>
+                <h5 class='card-title'>{{name}}</h5>
+                <p class='card-text'>{{description}}</p>
+                <a
+                  href='#'
+                  id='edit_service_commitment'
+                  class='btn btn-primary'
+                >edit service commitment</a>
+              </div>
+          {{/each}}
+        </div>
         <br />
         <br />
-        <button class='btn btn-primary' id='update_existing_skill_btn'>Next step</button>
-
+        <div class='row mt-20 d-flex flex-column'>
+          <h3>Your registered skill</h3>
+          <button
+            class='btn btn-warning w-50'
+            style='cursor: none;'
+          >{{session.provider_skill.category.name}}/{{session.provider_skill.skill.name}}</button>
+          <br />
+          <br />
+          <button
+            class='btn btn-primary w-50'
+            id='continue_getting_started_btn'
+          >Let's do some more...</button>
+        </div>
       {{else}}
         <div class='row'>
           <button
