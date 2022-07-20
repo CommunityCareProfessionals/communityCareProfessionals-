@@ -214,6 +214,10 @@ router.get('/whycare', async (req, res) => {
   res.render('why_care');
 });
 
+router.get('/contactus', async (req, res) => {
+  res.render('contactus');
+})
+
 router.put('/demo', async (req, res) => {
   try {
     if (!req.session.isAdmin) {
