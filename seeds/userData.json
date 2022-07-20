@@ -46,5 +46,13 @@
     "email": "montana@aol.com",
     "type": "consumer",    
     "password": "password12345"
-  }  
+  },  
+  {
+    "id": 7,
+    "first_name": "noservice",
+    "last_name": "provider",
+    "email": "noserviceprovider@aol.com",
+    "type": "provider",    
+    "password": "password12345"
+  }
 ]
