@@ -53,6 +53,10 @@ User.init(
         len: [8],
       },
     },
+    // profileImage: {
+    //   type: DataTypes.STRING,
+    //   defaultValue: "../images/eliareview.png"
+    // },
   },
   {
     hooks: {
