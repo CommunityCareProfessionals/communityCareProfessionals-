@@ -9,7 +9,7 @@ Community Care Professionals is an application for those looking to interact and
 Community Care professionals was created to make volunteering  accessible for those who willing to give their time. In addition, it is extremely accessible for the consumer and professional.
 
 # Table of Contents
-  - <a href = '#Installation'> </a>
+  - <a href = '#Installation
   - Installation
   - Usage 
   - Question
