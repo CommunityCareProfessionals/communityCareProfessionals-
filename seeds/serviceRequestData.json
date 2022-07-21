@@ -25,10 +25,27 @@
   },
   {
     "id": 4,
-    "name": "Home needs electrical rewiring",
+    "name": "School is flooded and dangerous",
     "description": "Duo id scaevola fabellas, sed te solum viderer. Id per modo novum labitur, brute minimum per ut. Ea qui melius lobortis, ut eos tritani periculis. Legere vocent est ut, dicunt iisque deseruisse at usu.",
     "provider_id": 10,
     "consumer_id": 12,
     "skillcategory_id": 7
+  },
+  {
+    "id": 5,
+    "name": "Home needs electrical rewiring",
+    "description": "Duo id scaevola fabellas, sed te solum viderer. Id per modo novum labitur, brute minimum per ut. Ea qui melius lobortis, ut eos tritani periculis. Legere vocent est ut, dicunt iisque deseruisse at usu.",
+    "provider_id": 10,
+    "consumer_id": 6,
+    "skillcategory_id": 7
+  },
+  {
+    "id": 6,
+    "name": "Basement is short-circuiting",
+    "description": "Duo id scaevola fabellas, sed te solum viderer. Id per modo novum labitur, brute minimum per ut. Ea qui melius lobortis, ut eos tritani periculis. Legere vocent est ut, dicunt iisque deseruisse at usu.",
+    "provider_id": 10,
+    "consumer_id": 4,
+    "skillcategory_id": 7
   }
+  
 ]
