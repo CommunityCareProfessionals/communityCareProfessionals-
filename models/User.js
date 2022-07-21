@@ -62,7 +62,7 @@ User.init(
     },
     profileImage: {
       type: DataTypes.STRING,
-      defaultValue: "../images/eliareview.png"
+      // defaultValue: "../images/eliareview.png"
     },
   },
   {
