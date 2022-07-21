@@ -6,36 +6,36 @@
           <strong>{{user.first_name}}!</strong>
           <br />Thank you for a willingness to serve.</h2>
       </div>
-    </div>
-    <!-- Tabs navs -->
-    <ul class='nav nav-tabs mb-3' id='ex1' role='tablist'>
-      <li data-toggle='tab' role='presentation'>
-        <a
-          class='nav-link active'
-          id='ex2-tab-1'
-          data-toggle='tab'
-          href='#ex2-tabs-1'
-          role='tab'
-        >Open projects</a>
-      </li>
-      <li data-toggle='tab' role='presentation'>
-        <a
-          class='nav-link'
-          id='ex2-tab-2'
-          data-toggle='tab'
-          href='#ex2-tabs-2'
-          role='tab'
-        >Recently Closed</a>
-      </li>
-    </ul>
-    {{#if services}}
+    </div>    
+      <!-- Tabs navs -->
+      <ul class='nav nav-tabs tab mb-3' id='ex1' role='tablist'>
+        <li data-toggle='tab' role='presentation'>
+          <a
+            class='nav-link active'
+            id='ex2-tab-1'
+            data-toggle='tab'
+            href='#ex2-tabs-1'
+            role='tab'
+          >Open projects</a>
+        </li>
+        <li data-toggle='tab' role='presentation'>
+          <a
+            class='nav-link'
+            id='ex2-tab-2'
+            data-toggle='tab'
+            href='#ex2-tabs-2'
+            role='tab'
+          >Recently Closed</a>
+
+        </li>
+      </ul>
       <div class='tab-content' id='ex2-content'>
         <div class='tab-pane fade show active' id='ex2-tabs-1' role='tabpanel'>
           <div class='row d-flex flex-row'>
             {{#each open_services}}
-              <div class='card col-md-6 nav-item p-0 w-25'>
-                <div class='card-body'>
-                  <H5 class='card-title bg-info'>{{name}}</H5>
+              <div class='card col-md-6 nav-item p-0 w-22'>
+                <div class='card-body'id="card-service">
+                  <H5 class='card-title'>{{name}}</H5>
                   <H5 class='card-title'>{{status}}</H5>
                   <H5 class='card-title'>Request Date:
                     {{format_date date_requested}}</H5>
@@ -56,8 +56,8 @@
           <div class='row d-flex flex-row'>
             {{#each closed_services}}
               <div class='card col-md-6 nav-item p-0 w-25'>
-                <div class='card-body'>
-                  <H5 class='card-title bg-info'>{{name}}</H5>
+                <div class='card-body' id="card-service">
+                  <H5 class='card-title'>{{name}}</H5>
                   <H5 class='card-title'>{{status}}</H5>
                   <H5 class='card-title'>Service Date:
                     {{format_date service_date}}</H5>
@@ -95,6 +95,24 @@
     {{/if}}
   </div>
   <div class='col-md-5'>
+                      <div class="card d-block mt-2"><p>
+
+        Name: <strong>{{user.first_name}}</strong><br>
+        <input type="text" value="{{user.id}}" hidden>
+        </p>
+        
+        <button class="btn newclass" type="button" data-toggle="collapse" data-target="#uploadPhoto" aria-expanded="false" aria-controls="collapseExample">
+        <i class="fas fa-file-image-o" aria-hidden="true"></i>&nbsp;Upload Profile Photo
+        </button>
+        <div class="collapse" id="uploadPhoto">
+          <div class="card card-body">
+            <form method="POST" action="/upload/{{id}}" enctype="multipart/form-data">
+              <input type="file" name="image" />
+              <input type="submit" />
+            </form>  
+          </div>
+        </div>
+        </div>
     <div
       id='carouselExampleSlidesOnly'
       class='carousel slide'
