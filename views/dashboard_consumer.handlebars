@@ -67,10 +67,7 @@
   </div>
 
 
-  {{!-- <div class="ml-5 mt-5 d-inline-block float-right">  --}}
-    {{!-- <div>test 2 </div> --}}
       <div class='col-md-5 d-flex'>
-        {{!-- <div class='col-md-4 d-inline-block'> --}}
           <div id='carouselExampleSlidesOnly' class='carousel slide d-flex justify-content-end' data-ride='carousel'>
             <div class='carousel-inner'>
               <div class='carousel-item active'>
@@ -85,8 +82,26 @@
             </div>
           </div>
         </div>
-    {{!-- </div> --}}
-  {{!-- </div> --}}
+
+            <div class="card child-card"><p>
+
+        Name: <strong>{{first_name}}</strong><br>
+        {{!-- INPUT FOR ID (PREFILLED) --}}
+        <input type="text" value="{{id}}" id="child-id" name="child-id" hidden>
+        </p>
+        
+        <button class="btn btn-light newclass" type="button" data-toggle="collapse" data-target="#uploadPhoto" aria-expanded="false" aria-controls="collapseExample">
+        <i class="fa fa-file-image-o" aria-hidden="true"></i>&nbsp;Upload Profile Photo
+        </button>
+        <div class="collapse" id="uploadPhoto">
+          <div class="card card-body">
+            <form method="POST" action="/upload/{{id}}" enctype="multipart/form-data">
+              <input type="file" name="image" />
+              <input type="submit" />
+            </form>  
+          </div>
+        </div>
+
 
 
 
@@ -119,24 +134,8 @@
 
 
 
-
-{{!-- <p><strong>Temporary Dashboard</strong></p>
-<div class='row'>
-  {{#each services}}
-    <div class='row'>
-      <div class='col-md-6'>
-        <p>{{id}}</p>
-      </div>
-      <div class='col-md-6'>
-        <p>{{name}}</p>
-      </div>
-    </div>
-  {{/each}}
-</div> --}}
-
-{{!-- <script>
-  $('#username').editable({ type: 'text', pk: 1, url: '/post', title: 'Enter
-  username' });
-</script> --}}
+<script>
+  $('#username').editable({ type: 'text', pk: 1, url: '/post', title: 'Enter username' });
+</script>
 
 <script src="/public/js/"></script>
