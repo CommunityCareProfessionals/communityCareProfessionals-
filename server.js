@@ -94,7 +94,7 @@ app.post("/upload/:id", upload.single("image"), async (req, res) => {
       }
     })
     // return res.json({status: "success", result });
-    console.log(result);
+    // console.log(result);
     res.redirect('/api/dashboard/');
   } catch (err) {
     console.log(err)

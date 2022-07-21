@@ -67,7 +67,25 @@
   </div>
 
 
-      <div class='col-md-5 d-flex'>
+      <div class='col-md-5 d-block'>
+                  <div class="card d-block mt-2"><p>
+
+        Name: <strong>{{user.first_name}}</strong><br>
+        <input type="text" value="{{user.id}}" hidden>
+        </p>
+        
+        <button class="btn btn-light newclass" type="button" data-toggle="collapse" data-target="#uploadPhoto" aria-expanded="false" aria-controls="collapseExample">
+        <i class="fas fa-file-image-o" aria-hidden="true"></i>&nbsp;Upload Profile Photo
+        </button>
+        <div class="collapse" id="uploadPhoto">
+          <div class="card card-body">
+            <form method="POST" action="/upload/{{id}}" enctype="multipart/form-data">
+              <input type="file" name="image" />
+              <input type="submit" />
+            </form>  
+          </div>
+        </div>
+        </div>
           <div id='carouselExampleSlidesOnly' class='carousel slide d-flex justify-content-end' data-ride='carousel'>
             <div class='carousel-inner'>
               <div class='carousel-item active'>
@@ -81,27 +99,8 @@
               </div>
             </div>
           </div>
-        </div>
 
-            <div class="card child-card"><p>
-
-        Name: <strong>{{first_name}}</strong><br>
-        {{!-- INPUT FOR ID (PREFILLED) --}}
-        <input type="text" value="{{id}}" id="child-id" name="child-id" hidden>
-        </p>
-        
-        <button class="btn btn-light newclass" type="button" data-toggle="collapse" data-target="#uploadPhoto" aria-expanded="false" aria-controls="collapseExample">
-        <i class="fa fa-file-image-o" aria-hidden="true"></i>&nbsp;Upload Profile Photo
-        </button>
-        <div class="collapse" id="uploadPhoto">
-          <div class="card card-body">
-            <form method="POST" action="/upload/{{id}}" enctype="multipart/form-data">
-              <input type="file" name="image" />
-              <input type="submit" />
-            </form>  
-          </div>
-        </div>
-
+      
 
 
 
