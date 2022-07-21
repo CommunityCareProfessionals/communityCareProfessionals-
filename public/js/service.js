@@ -15,9 +15,9 @@ const gettingStartedContinueHandler = async (e) => {
 
   if (isProvider) {
     if (document.querySelector('#publish_skill_radio').checked) {
-      document.location.replace('/api/services/publishskill');
+      gotoPublishSkill();
     } else if (document.querySelector('#match_service_radio').checked) {
-      document.location.replace('/api/services/match');
+      gotoMatchServiceRequest();
     } else {
       document.location.replace(
         '/api/services/' +
@@ -195,12 +195,44 @@ publishSkillHandler = async () => {
   }
 };
 
+updateServiceRequest = async () => {
+  const id = document
+    .querySelector('#accept_service_request_btn')
+    .getAttribute('data-id');
+
+  const status = document
+    .querySelector('#accept_service_request_btn')
+    .getAttribute('data-status');
+
+  if (id) {
+    const response = await fetch('/api/services/' + id, {
+      method: 'PUT',
+      body: JSON.stringify({
+        id,
+        status,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      gotoDashboard();
+    } else {
+      alert(await response.json().message);
+    }
+  }
+};
+
+gotoPublishSkill = (e) => {
+  document.location.replace('/api/services/publishskill');
+};
+
 gotoMatchServiceRequest = (e) => {
   document.location.replace('/api/services/match');
 };
 
-const enableGettingStartedContinueBtn = (e) => {
-  // enable Continue button
+const enableGettingStartedContinueBtn = (btn) => {
   document.querySelector('#continue_getting_started_btn').disabled = false;
 };
 
@@ -270,11 +302,11 @@ if (document.querySelector('#back_publish_skill_btn')) {
     .addEventListener('click', gotoGettingStarted);
 }
 
-// if (document.querySelector('#match_service_radio')) {
-//   document
-//     .querySelector('#match_service_radio')
-//     .addEventListener('click', gotoMatchServiceRequest);
-// }
+if (document.querySelector('#accept_service_request_btn')) {
+  document
+    .querySelector('#accept_service_request_btn')
+    .addEventListener('click', updateServiceRequest);
+}
 
 function datetimestamp() {
   var today = new Date();

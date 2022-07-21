@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const ServiceRequest = require('../../models/ServiceRequest');
 const {
   User,
   Skill,
   Category,
   SkillCategory,
   UserSkill,
+  ServiceRequest,
 } = require('../../models');
 const withAuth = require('../../utils/auth');
 
@@ -13,11 +13,12 @@ router.post('/new', withAuth, async (req, res) => {
   try {
     console.log({
       ...req.body,
+
       consumer_id: req.session.user_id,
     });
     const newSR = await ServiceRequest.create({
       ...req.body,
-      status: 'new',
+      status: 'NEW',
       consumer_id: req.session.user_id,
     });
 
@@ -243,6 +244,30 @@ router.get('/:id', async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  try {
+    console.log('req.params.id', req.params.id);
+
+    const updatedService = await ServiceRequest.update(
+      {
+        provider_id: req.session.user.id,
+        status: req.body.status,
+        service_date: new Date(),
+      },
+      {
+        where: { id: req.body.id },
+      }
+    );
+
+    console.log('Updated Service', updatedService);
+
+    res.status(200).json(updatedService);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'failed to update service request' });
   }
 });
 
