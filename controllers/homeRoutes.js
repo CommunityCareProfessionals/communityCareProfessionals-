@@ -175,6 +175,13 @@ router.get('/dashboard', withAuth, async (req, res) => {
       render_uri += '_with_skill';
     }
 
+    if (
+      !req.session.isAdmin &&
+      !req.session.isProvider &&
+      serviceRequests.length === 0
+    ) {
+      render_uri += '_no_sr';
+    }
     // customize handlebars based on user type
     res.render(render_uri, {
       services: serviceRequests,
