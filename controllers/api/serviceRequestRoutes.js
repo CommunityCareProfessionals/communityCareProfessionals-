@@ -157,6 +157,7 @@ router.get('/getting-started', async (req, res) => {
     });
     const render_options = {
       services: serviceRequests,
+      hasNoServiceRequests: serviceRequests.length === 0,
       user: req.session.user,
       logged_in: true,
     };
