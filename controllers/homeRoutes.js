@@ -8,6 +8,7 @@ const {
   Skill,
   UserSkill,
 } = require('../models');
+const moment = require('moment');
 
 const withAuth = require('../utils/auth');
 
@@ -110,12 +111,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
   try {
     const find_options = {
       attributes: {
-        exclude: [
-          'provider_id',
-          'consumer_id',
-          'skillcategory_id',
-          'date_requested',
-        ],
+        exclude: ['provider_id', 'consumer_id', 'skillcategory_id'],
       },
       include: [
         {
@@ -156,8 +152,6 @@ router.get('/dashboard', withAuth, async (req, res) => {
       provider_skill = provider_skill.get({ plain: true }).provider_skills[0];
 
       req.session.provider_skill = provider_skill;
-
-      console.log('display_provider_skill', provider_skill);
     } else {
       find_options.where = {
         consumer_id: req.session.user.id,
@@ -170,18 +164,24 @@ router.get('/dashboard', withAuth, async (req, res) => {
     const serviceRequests = serviceData.map((service) => {
       let sr = service.get({ plain: true });
 
+      console.log('sr.date_requested: ', sr.date_requested);
+      console.log('service.date_requested: ', service.date_requested);
+
       return {
         id: sr.id,
         name: sr.name,
+        date_requested: sr.date_requested,
         service_date: sr.service_date,
+        status: sr.status,
+        isOpen: sr.status === 'OPEN',
         description: sr.description,
         provider: sr.provider,
         consumer: sr.consumer,
       };
     });
 
-    // console.log('serviceRequests: ', serviceRequests);
-    console.log('session: ', req.session);
+    console.log('serviceRequests: ', serviceRequests);
+    // console.log('session: ', req.session);
 
     let render_uri = 'dashboard_' + req.session.user.type;
 
@@ -189,12 +189,22 @@ router.get('/dashboard', withAuth, async (req, res) => {
       render_uri += '_with_skill';
     }
 
+    console.log(
+      'open',
+      serviceRequests.filter((service) => service.status === 'OPEN')
+    );
     // console.log('render_uri', render_uri);
     // console.log('process.env', process.env);
 
     // customize handlebars based on user type
     res.render(render_uri, {
       services: serviceRequests,
+      open_services: serviceRequests.filter(
+        (service) => service.status === 'OPEN'
+      ),
+      closed_services: serviceRequests.filter(
+        (service) => service.status === 'CLOSED'
+      ),
       provider_skill,
       user: req.session.user,
       isDemo: process.env.isDemo === 'true',
@@ -216,7 +226,7 @@ router.get('/whycare', async (req, res) => {
 
 router.get('/contactus', async (req, res) => {
   res.render('contactus');
-})
+});
 
 router.put('/demo', async (req, res) => {
   try {

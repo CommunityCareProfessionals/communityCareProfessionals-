@@ -1,31 +1,45 @@
-{{#if session.isProvider}}
-  {{#each services as |service|}}
-    <div class='card' style='width: 18rem;'>
-      <img class='card-img-top' src='...' alt='Card image cap' />
-      <div class='card-body'>
-        <h5 class='card-title'>{{name}}</h5>
-        <p class='card-text'>{{description}}</p>
-        <a href='#' id='edit_service_commitment' class='btn btn-primary'>edit
-          service commitment</a>
-      </div>
+<div class='row'>
+  <div class='col-md-10'>
+    <div class='row d-flex flex-row'>
+
+      {{#if session.isProvider}}
+        {{#each services}}
+          <div class='card m-2 p-0 w-25'>
+            <div class='card-body'>
+              <H5 class='card-title bg-info'>{{name}}</H5>
+              <H5 class='card-title'>{{status}}</H5>
+              <H5 class='card-title'>{{date_requested}}</H5>
+              <p class='card-text'>{{description}}</p>
+              <a
+                href='#'
+                data-id='{{id}}'
+                data-status='OPEN'
+                id='accept_service_request_btn'
+                class='btn btn-primary'
+              >Accept</a>
+            </div>
+          </div>
+        {{/each}}
+      {{else}}
+        {{#each services}}
+          <div class='row mb-4 service'>
+            <div class='col-md-5'>
+              <h2>
+                <a href='/api/services/{{id}}'>{{name}}</a>
+              </h2>
+              <p>
+                {{service.description}}
+              </p>
+            </div>
+            <div class='col-md-7'>
+              <p>
+                {{service.description}}
+              </p>
+            </div>
+          </div>
+        {{/each}}
+      {{/if}}
     </div>
-  {{/each}}
-{{else}}
-  {{#each services as |service|}}
-    <div class='row mb-4 service'>
-      <div class='col-md-5'>
-        <h2>
-          <a href='/api/services/{{service.id}}'>{{service.name}}</a>
-        </h2>
-        <p>
-          {{service.description}}
-        </p>
-      </div>
-      <div class='col-md-7'>
-        <p>
-          {{service.description}}
-        </p>
-      </div>
-    </div>
-  {{/each}}
-{{/if}}
+  </div>
+</div>
+<script src='../../js/service.js'></script>

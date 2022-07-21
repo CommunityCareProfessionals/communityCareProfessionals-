@@ -1,5 +1,5 @@
-<div class='row'>
-  <div class='col-md-6'>
+<div class='row mb-15'>
+  <div class='col-md-7'>
     <div class='row mb-5'>
       <div>
         <h2 class='text-left'>Hey
@@ -8,25 +8,70 @@
       </div>
     </div>
     {{#if services}}
-      <div class='row d-flex flex-row'>
-        {{#each services}}
-          <div class='card col-md-6 p-0' style='width: 20rem;'>
-            <div class='card-body'>
-              <h5 class='card-title bg-info'>{{name}}</h5>
-              <p class='card-text'>{{description}}</p>
-              <a
-                href='#'
-                id='edit_service_commitment'
-                class='btn btn-primary'
-              >edit service commitment</a>
-            </div>
+      <!-- Tabs navs -->
+      <ul class='nav nav-tabs mb-3' id='ex1' role='tablist'>
+        <li data-toggle='tab' role='presentation'>
+          <a
+            class='nav-link active'
+            id='ex2-tab-1'
+            data-toggle='tab'
+            href='#ex2-tabs-1'
+            role='tab'
+          >Open projects</a>
+        </li>
+        <li data-toggle='tab' role='presentation'>
+          <a
+            class='nav-link'
+            id='ex2-tab-2'
+            data-toggle='tab'
+            href='#ex2-tabs-2'
+            role='tab'
+          >Recently Closed</a>
+        </li>
+      </ul>
+      <div class='tab-content' id='ex2-content'>
+        <div class='tab-pane fade show active' id='ex2-tabs-1' role='tabpanel'>
+          <div class='row d-flex flex-row'>
+            {{#each open_services}}
+              <div class='card col-md-6 nav-item p-0 w-25'>
+                <div class='card-body'>
+                  <H5 class='card-title bg-info'>{{name}}</H5>
+                  <H5 class='card-title'>{{status}}</H5>
+                  <H5 class='card-title'>Request Date:
+                    {{format_date date_requested}}</H5>
+                  <p class='card-text'>{{description}}</p>
+                  <a
+                    href='#'
+                    data-id='{{id}}'
+                    data-status='CLOSED'
+                    id='close_service_request_btn'
+                    class='btn btn-primary'
+                  >Project completed</a>
+                </div>
+              </div>
+            {{/each}}
           </div>
-        {{/each}}
+        </div>
+        <div class='tab-pane fade' id='ex2-tabs-2' role='tabpanel'>
+          <div class='row d-flex flex-row'>
+            {{#each closed_services}}
+              <div class='card col-md-6 nav-item p-0 w-25'>
+                <div class='card-body'>
+                  <H5 class='card-title bg-info'>{{name}}</H5>
+                  <H5 class='card-title'>{{status}}</H5>
+                  <H5 class='card-title'>Service Date:
+                    {{format_date service_date}}</H5>
+                  <p class='card-text'>{{description}}</p>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
       </div>
       <hr />
       <br />
 
-      <div class='row d-flex flex-column'>
+      <div class='row d-flex flex-column mb-15'>
         <h3>Your registered skill</h3>
         <button
           class='btn btn-warning w-50'
@@ -49,7 +94,7 @@
       </div>
     {{/if}}
   </div>
-  <div class='col-md-6'>
+  <div class='col-md-5'>
     <div
       id='carouselExampleSlidesOnly'
       class='carousel slide'
@@ -81,4 +126,6 @@
     </div>
   </div>
 </div>
+<br />
+<br />
 <script src='../../js/dashboard.js'></script>
