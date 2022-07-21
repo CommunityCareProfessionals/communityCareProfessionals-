@@ -224,6 +224,30 @@ updateServiceRequest = async () => {
   }
 };
 
+
+updateServiceRequestConsumer = async () => {
+  const id = document
+    .querySelector("#continue_title_btn")
+    .getAttribute("data-id");
+  if (id) {
+    const response = await fetch("/api/services/" + id, {
+      method: "PUT",
+      body: JSON.stringify({
+        id,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.ok) {
+      gotoDashboard();
+    } else {
+      alert(await response.json().message);
+    }
+  }
+};
+
+
 gotoPublishSkill = (e) => {
   document.location.replace('/api/services/publishskill');
 };

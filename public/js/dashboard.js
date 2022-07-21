@@ -18,6 +18,17 @@ if (document.querySelector('#update_existing_skill_btn')) {
     .addEventListener('click', gotoPublishSkill);
 }
 
+const goEditPost = (e) => {
+  document.location.replace('/api/services/getting-started');
+};
+
+if (document.querySelector('#editBtn')) {
+  document
+    .querySelector('#editBtn')
+    .addEventListener('click', goEditPost);
+
+}
+
 updateServiceRequest = async () => {
   const id = document
     .querySelector('#close_service_request_btn')

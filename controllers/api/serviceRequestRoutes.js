@@ -271,4 +271,24 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+  try {
+    console.log('req.params.id', req.params.id);
+  
+    const updateService = await ServiceRequest.update(req.body, {
+  
+      where: {id:req.params.id}
+  
+    });
+
+  res.status(200).json(updateService);
+
+} catch(err) {
+  console.log(err); 
+    res.status(500).json({ message: 'failed to update service request'})
+  }
+
+  
+});
+
 module.exports = router;
