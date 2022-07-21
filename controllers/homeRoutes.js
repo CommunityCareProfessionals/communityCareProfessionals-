@@ -24,13 +24,9 @@ router.get('/', async (req, res) => {
       ],
     });
 
-    console.log('categoryData', categoryData);
-
     const categories = categoryData.map((category) => {
       return category.get({ plain: true });
     });
-
-    console.log(categories);
 
     // Pass serialized data and session flag into template
     res.render('homepage', {
@@ -53,8 +49,6 @@ router.get('/profile', withAuth, async (req, res) => {
     });
 
     const user = userData.get({ plain: true });
-
-    console.log(user);
 
     res.render('profile', {
       ...user,
@@ -85,7 +79,6 @@ router.get('/login', (req, res) => {
 router.get('/signup', async (req, res) => {
   res.render('role_selection');
 
-  console.log(req.session.logged_in, 'req.sess');
   if (req.session.logged_in) {
     res.redirect('/dashboard');
     return;
@@ -98,7 +91,6 @@ router.get('/register', withAuth, async (req, res) => {
     type: req.query.type,
   });
 
-  console.log(req.session.logged_in, 'req.sess');
   if (req.session.logged_in) {
     res.redirect('/dashboard');
     return;
@@ -164,9 +156,6 @@ router.get('/dashboard', withAuth, async (req, res) => {
     const serviceRequests = serviceData.map((service) => {
       let sr = service.get({ plain: true });
 
-      console.log('sr.date_requested: ', sr.date_requested);
-      console.log('service.date_requested: ', service.date_requested);
-
       return {
         id: sr.id,
         name: sr.name,
@@ -180,21 +169,11 @@ router.get('/dashboard', withAuth, async (req, res) => {
       };
     });
 
-    console.log('serviceRequests: ', serviceRequests);
-    // console.log('session: ', req.session);
-
     let render_uri = 'dashboard_' + req.session.user.type;
 
     if (req.session.isProvider && provider_skill) {
       render_uri += '_with_skill';
     }
-
-    console.log(
-      'open',
-      serviceRequests.filter((service) => service.status === 'OPEN')
-    );
-    // console.log('render_uri', render_uri);
-    // console.log('process.env', process.env);
 
     // customize handlebars based on user type
     res.render(render_uri, {
@@ -249,12 +228,7 @@ router.put('/demo', async (req, res) => {
       });
 
       req.session.demo_users = demoUsers;
-
-      console.log('demoUsers: ', demoUsers);
     }
-
-    // console.log('req.body.isDemo', req.body.isDemo);
-    // console.log('req.session.isDemo', req.session.isDemo);
 
     res.status(200).json({ isDemo: req.body.isDemo });
   } catch (err) {

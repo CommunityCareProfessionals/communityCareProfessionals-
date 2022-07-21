@@ -1,73 +1,68 @@
-     <div class='row'>
-        <div class='mb-5'>
-          <h2 class='text-left'>
-            {{user.first_name}}, Welcome to your Dashboard</h2>
-        </div>
-      </div>
-
 <div class='row'>
-  <div class='col-md-7'>
-    <div class='mb-5'>
-
-      
-      <div>
+  <div class='col-md-8 mb-3'>
+    <h2 class='text-left'>Hey
+      <strong>{{user.first_name}}!</strong><br>Your hero is only a few clicks away.
+    </h2>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-6'>
         <div class="bg-white p-2 border border-dark">
-          <h1> Your Postings</h1>
+          <h1> Your Service Requests</h1>
           <div>
             <div class="tab bg-white mb-4">
               <button class="tablinks" onclick="openCity(event, 'Active')" id="defaultOpen">Active</button>
               <button class="tablinks" onclick="openCity(event, 'RecentlyFilled')">Recently Filled</button>
             </div>
             <div id="Active" style="display:block" class="tabcontent">
+              {{#if services}}
               <div>
-                {{#if services}}
                 {{#each services}}
-                <div class='card ml-3' style='width: 18rem;'>
+                <div class='card ml-3 w-25'>
                   <div class='card-body p-3' id="card-service">
-                    <h5 class='card-title'>{{name}}</h5>
+                    <H5 class='card-title'>{{name}}</H5>
+                    <H5 class='card-title'>{{status}}</H5>
+                    <H5 class='card-title'>Service Date: {{format_date date_requested}}</H5>
                     <p class='card-text'>{{description}}</p>
                     <a href='/api/services/getting-started' class='btn btn-primary'>Edit detail</a>
                   </div>
                 </div>
-
-                <div class='row m-4'>
-                  {{#each provider.provider_skills}}
-                  {{skill.name}}
-                  {{/each}}
-                </div>
                 {{/each}}
                 {{else}}
-                <div class='row ml-2'>
-                  <p>No active job posts</p>
-                  <p>Post a service request and find your provider.</p>
-                  <button type='submit' class='btn btn-primary' id='continue_getting_started_btn'><a href='/api/services/getting-started'>Post a Service
-                    Request</a></button>
+                <div class='row'>
+                  <div class="ml-2">
+                    <p>No active job posts</p>
+                  </div>
+                  <div>
+                    <p>
+                      Post a service request and find your provider.
+                    </p>
+                  </div>
                 </div>
-                {{/if}}
+                <div class="row">
+                  <button type='submit' class='btn btn-primary float-right ml-2' id='continue_getting_started_btn'>
+                    Post a Service
+                    Request
+                  </button>
+                </div>
               </div>
+              {{/if}}
             </div>
-
             <div id="RecentlyFilled" class="tabcontent">
               <div></div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="bg-white mt-3 p-2 border border-dark">
-        <h1> Pending </h1>
-        <div class="border border-dark"></div>
-        <div>Pending request</div>
-      </div>
-
-
-
-
-    </div>
+        <div class="row justify-content-center">
+          <div class="col-md-12 bg-white mt-3 m-2 p-2 border border-dark">
+            <h1> Pending </h1>
+            <div class="border border-dark"></div>
+            <div>Pending request</div>
+          </div>
+        </div>
   </div>
-
-
-      <div class='col-md-5 d-block'>
+</div>
+<div class='col-md-5 d-block'>
                   <div class="card d-block mt-2"><p>
 
         Name: <strong>{{user.first_name}}</strong><br>
@@ -100,10 +95,6 @@
             </div>
           </div>
 
-      
-
-
-
     <script>
       function openCity(evt, cityName) {
         // Declare all variables
@@ -128,13 +119,3 @@
       }
 
     </script>
-
-
-
-
-
-<script>
-  $('#username').editable({ type: 'text', pk: 1, url: '/post', title: 'Enter username' });
-</script>
-
-<script src="/public/js/"></script>

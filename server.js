@@ -9,7 +9,7 @@ require('dotenv').config();
 const multer = require('multer');
 const uuid = require('uuid').v4;
 
-const { s3Uploadv2 } = require('./s3Service')
+const { s3Uploadv2 } = require('./s3Service');
 const sequelize = require('./config/connection');
 const { User } = require('./models');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);

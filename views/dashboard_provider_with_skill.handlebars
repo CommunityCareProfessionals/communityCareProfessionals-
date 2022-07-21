@@ -6,9 +6,7 @@
           <strong>{{user.first_name}}!</strong>
           <br />Thank you for a willingness to serve.</h2>
       </div>
-    </div>
-    {{#if services}}
-      
+    </div>    
       <!-- Tabs navs -->
       <ul class='nav nav-tabs tab mb-3' id='ex1' role='tablist'>
         <li data-toggle='tab' role='presentation'>
@@ -76,13 +74,13 @@
       <div class='row d-flex flex-column mb-15'>
         <h3>Your registered skill</h3>
         <button
-          class='btn btn-warning w-50'
+          class='btn btn-warning w-50 mb-5 ml-5'
           style='cursor: none;'
-        >{{session.provider_skill.category.name}}/{{session.provider_skill.skill.name}}</button>
+        >{{session.provider_skill.category.name}}-{{session.provider_skill.skill.name}}</button>
         <br />
         <br />
         <button
-          class='btn btn-primary w-50'
+          class='btn btn-primary w-25'
           id='continue_getting_started_btn'
         >Let's do some more...</button>
       </div>

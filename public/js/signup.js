@@ -21,7 +21,7 @@ const signupFormHandler = async (event) => {
   const password = document.querySelector('#password-signup').value.trim();
   const type = document.querySelector('#type-signup').value;
 
-  console.log(first_name, last_name, email, password, type, 'signupdata');
+  // console.log(first_name, last_name, email, password, type, 'signupdata');
 
   if (first_name && last_name && email && password && type) {
     const response = await fetch('/api/users', {
@@ -35,7 +35,6 @@ const signupFormHandler = async (event) => {
       }),
       headers: { 'Content-Type': 'application/json' },
     });
-    console.log(response);
 
     if (response.ok) {
       document.location.replace('/dashboard');
