@@ -101,6 +101,10 @@ section {
   border-color: var(--disabled-bg); */
 }
 
+.btn {
+  background-color: #43b17a;
+}
+
 #card-service {
   background-color: #43b17a;
 }
