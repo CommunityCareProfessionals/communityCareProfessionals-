@@ -22,7 +22,7 @@ const hbs = exphbs.create({ helpers });
 
 const sess = {
   secret: 'Super secret secret',
-  cookie: {},
+  cookie: 864000,
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -95,7 +95,7 @@ app.post("/upload/:id", upload.single("image"), async (req, res) => {
     })
     // return res.json({status: "success", result });
     // console.log(result);
-    res.redirect('/api/dashboard/');
+    res.redirect('/api/dashboard');
   } catch (err) {
     console.log(err)
   }
