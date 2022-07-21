@@ -1,0 +1,134 @@
+<div class='row'>
+  <div class='col-md-6 text-center'>
+    {{#if isProvider}}
+      <h2>sign up to help others</h2>
+    {{else}}
+      <h2>sign up to ask for help </h2>
+    {{/if}}
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-6'>
+    <form class='form signup-form'>
+      <div class='form-group'>
+        <label for='firstname-signup'>First Name:</label>
+        <input class='form-input' type='text' id='firstname-signup' />
+      </div>
+      <div class='form-group'>
+        <label for='lastname-signup'>Last Name:</label>
+        <input class='form-input' type='text' id='lastname-signup' />
+      </div>
+      <div class='form-group'>
+        <label for='country-signup'>Country:</label>
+        <input class='form-input' type='text' id='country-signup' />
+      </div>
+      <div class='form-group'>
+        <label for='zip-signup'>Zip Code:</label>
+        <input class='form-input' type='text' id='zip-signup' />
+      </div>
+      <div class='form-group'>
+        <label for='email-signup'>Email:</label>
+        <input class='form-input' type='text' id='email-signup' />
+      </div>
+      <div class='form-group'>
+        <label for='password-signup'>Password:</label>
+        <input class='form-input' type='password' id='password-signup' />
+      </div>
+      {{!-- <div class='form-group'>
+        <section>
+          <input
+            type='radio'
+            id='provider-signup'
+            name='type-signup'
+            value='provider'
+          />
+          <label for='provider-signup'>Provider</label>&nbsp;
+          <input
+            type='radio'
+            id='consumer-signup'
+            name='type-signup'
+            value='consumer'
+          />
+          <label for='consumer-signup'>Consumer</label>
+          <div id='provider-services' style='display: none;'>
+            <label>Select A Category</label>
+            <div class='form-group'>
+              <input
+                type='radio'
+                id='interpersonal-cat'
+                name='type-provider'
+                value='interpersonal'
+              />
+              <label for='provider-interpersonal'>Interpersonal</label>&nbsp;
+              <input
+                type='radio'
+                id='legal-cat'
+                name='type-provider'
+                value='legal'
+              />
+              <label for='provider-legal'>Legal and Advocacy</label>
+              <input
+                type='radio'
+                id='housing-cat'
+                name='type-provider'
+                value='housing'
+              />
+              <label for='provider-housing'>Housing and Facilities</label>
+              <input
+                type='radio'
+                id='education-cat'
+                name='type-provider'
+                value='education'
+              />
+              <label for='provider-education'>Education</label>
+              <input
+                type='radio'
+                id='lang-cat'
+                name='type-provider'
+                value='lang'
+              />
+              <label for='provider-language'>Language and Culture</label>
+            </div>
+            {{!-- {{#each category }}
+                <input type="radio" id="{{id}}" name="provider_category" value="{{id}}">
+                <label for="{{id}}">{{name}}</label>
+                {{else}}
+                <p>EMPTY!</p>
+              {{/each}} --}}
+      {{!  </div>
+        </section>
+      </div> }}
+      <br />
+      <div class='form-group'>
+        <button class='btn btn-primary' type='submit'>signup</button>
+      </div>
+      <input
+        type='hidden'
+        name='type-signup'
+        id='type-signup'
+        value='{{type}}'
+      />
+    </form>
+  </div>
+</div>
+
+<script src='../../js/signup.js'></script>
+
+{{! <script>
+  const provider = (event) => {
+    var selectProvider = document.querySelector('#provider-signup');
+
+    if (selectProvider.checked) {
+      document.querySelector('#provider-services').style.display = 'block';
+    } else {
+      document.querySelector('#provider-services').style.display = 'none';
+    };
+  };
+
+  if (document.querySelector('#provider-signup')) {
+    document
+      .querySelector('#provider-signup')
+      .addEventListener('change', provider);
+  }
+
+</script> }}

@@ -1,21 +1,67 @@
-<!-- Loop over each object in the projects array -->
-{{#each services as |service| }}
-<div class="row mb-4 service">
-  <div class="col-md-5">
-    <h2>
-      <!-- Call helper function with triple brackets to render the emoji span as HTML -->
-      {{!-- {{{get_emoji}}} --}}
-      <a href="/api/services/{{service.id}}">{{service.name}}</a>
-    </h2>
-    <p>
-      {{service.description}}
-    </p>
-    {{!-- <p>Created by {{project.user.name}} on {{format_date project.date_created}}</p> --}}
-  </div>
-  <div class="col-md-7">
-    <p>
-      {{service.description}}
-    </p>
+<div class='row'>
+  <div class='col-md-10'>
+    <div class='row d-flex flex-row'>
+
+      {{#if session.isProvider}}
+        {{#unless has_new_services}}
+          <div class='col-md-6'>
+            <blockquote class='blockquote fs-1'>
+              <p>The world has no problems for you to solve rignt now, so how
+                about some wise sayings for the road.</p>
+            </blockquote>
+
+            <figure class='text-center'>
+              <blockquote class='blockquote'>
+                <p>If your only tool is a hammer then every problem looks like a
+                  nail</p>
+              </blockquote>
+              <figcaption class='blockquote-footer'>
+                <cite title='Source Title'>Abraham Maslow</cite>
+              </figcaption>
+            </figure>
+
+            <button class='btn btn-info' onclick='gotoDashboard(this)'>Return to
+              dashboard</button>
+          </div>
+        {{else}}
+          {{#each services}}
+            <div class='card m-2 p-0 w-25'>
+              <div class='card-body'>
+                <H5 class='card-title bg-info'>{{name}}</H5>
+                <H5 class='card-title'>{{status}}</H5>
+                <H5 class='card-title'>{{date_requested}}</H5>
+                <p class='card-text'>{{description}}</p>
+                <a
+                  href='#'
+                  data-id='{{id}}'
+                  data-status='OPEN'
+                  id='accept_service_request_btn'
+                  class='btn btn-primary'
+                >Accept</a>
+              </div>
+            </div>
+          {{/each}}
+        {{/unless}}
+      {{else}}
+        {{#each services}}
+          <div class='row mb-4 service'>
+            <div class='col-md-5'>
+              <h2>
+                <a href='/api/services/{{id}}'>{{name}}</a>
+              </h2>
+              <p>
+                {{service.description}}
+              </p>
+            </div>
+            <div class='col-md-7'>
+              <p>
+                {{service.description}}
+              </p>
+            </div>
+          </div>
+        {{/each}}
+      {{/if}}
+    </div>
   </div>
 </div>
-{{/each}}
+<script src='../../js/service.js'></script>

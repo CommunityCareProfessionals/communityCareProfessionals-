@@ -356,7 +356,8 @@ body {
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 16px;
   color: #1a1a1a;
 }
@@ -420,13 +421,14 @@ button {
 }
 
 a {
-  color: #1b89bc;
+  color: black;
   text-decoration: none;
 }
 
 a:hover {
-  color: #065b83;
+  color: #068340;
   text-decoration: underline;
+  transform: scale(1.2)
 }
 
 /* HEIGHT / WIDTH UTILS */
@@ -871,6 +873,10 @@ a:hover {
   text-align: center !important;
 }
 
+.text-left {
+  text-align: left !important;
+}
+
 .text-justify {
   text-align: justify !important;
 }
@@ -1014,7 +1020,10 @@ a:hover {
 }
 
 .btn.btn-primary:hover {
-  background-color: #57779a;
+  background-color: #579a5b;
+  text-decoration: underline;
+
+
 }
 
 .btn.btn-danger {
@@ -1159,8 +1168,8 @@ form [type='radio'] {
   display: inline-block;
 }
 
-label form [type='checkbox'], label
-form [type='radio'] {
+label form [type='checkbox'],
+label form [type='radio'] {
   display: inline-block;
 }
 

@@ -2,25 +2,82 @@
   {
     "id": 1,
     "name": "Sally_neworking_1",
-    "description": "Sally_neworking_1",
+    "status": "OPEN",
+    "description": "Lorem ipsum dolor sit amet, erant probatus molestiae vix ut, usu nullam insolens ad. Et ferri habemus lucilius quo. His no graeco quodsi, at mea ludus euripidis, his sapientem gloriatur at.",
     "provider_id": 1,
     "consumer_id": 4,
-    "category_skill_id": 1
+    "skillcategory_id": 1
   },
   {
     "id": 2,
     "name": "Martin_litigation_1",
-    "description": "Martin_litigation_1",
+    "status": "OPEN",
+    "description": "Lorem ipsum dolor sit amet, erant probatus molestiae vix ut, usu nullam insolens ad. Et ferri habemus lucilius quo. His no graeco quodsi, at mea ludus euripidis, his sapientem gloriatur at.",
     "provider_id": 2,
     "consumer_id": 5,
-    "category_skill_id": 5
+    "skillcategory_id": 5
   },
   {
     "id": 3,
     "name": "Montana_Electrical_1",
-    "description": "Montana_Electrical_1",
+    "status": "OPEN",
+    "description": "Duo id scaevola fabellas, sed te solum viderer. Id per modo novum labitur, brute minimum per ut. Ea qui melius lobortis, ut eos tritani periculis. Legere vocent est ut, dicunt iisque deseruisse at usu.",
     "provider_id": 3,
     "consumer_id": 6,
-    "category_skill_id": 7
+    "skillcategory_id": 7
+  },
+  {
+    "id": 4,
+    "name": "School is flooded and dangerous",
+    "status": "OPEN",
+    "description": "Duo id scaevola fabellas, sed te solum viderer. Id per modo novum labitur, brute minimum per ut. Ea qui melius lobortis, ut eos tritani periculis. Legere vocent est ut, dicunt iisque deseruisse at usu.",
+    "provider_id": 10,
+    "consumer_id": 12,
+    "skillcategory_id": 7
+  },
+  {
+    "id": 5,
+    "name": "Home needs electrical rewiring",
+    "status": "OPEN",
+    "description": "Duo id scaevola fabellas, sed te solum viderer. Id per modo novum labitur, brute minimum per ut. Ea qui melius lobortis, ut eos tritani periculis. Legere vocent est ut, dicunt iisque deseruisse at usu.",
+    "provider_id": 10,
+    "consumer_id": 6,
+    "skillcategory_id": 7
+  },
+  {
+    "id": 6,
+    "name": "New heater in basement",
+    "status": "OPEN",
+    "description": "Duo id scaevola fabellas, sed te solum viderer. Id per modo novum labitur, brute minimum per ut. Ea qui melius lobortis, ut eos tritani periculis. Legere vocent est ut, dicunt iisque deseruisse at usu.",
+    "provider_id": 10,
+    "consumer_id": 4,
+    "skillcategory_id": 7
+  },
+  {
+    "id": 7,
+    "name": "Living room electric outlet",
+    "status": "NEW",
+    "description": "Duo id scaevola fabellas, sed te solum viderer. Id per modo novum labitur, brute minimum per ut. Ea qui melius lobortis, ut eos tritani periculis. Legere vocent est ut, dicunt iisque deseruisse at usu.",
+    "consumer_id": 5,
+    "skillcategory_id": 7
+  },
+  {
+    "id": 8,
+    "name": "Truck engine failure",
+    "status": "NEW",
+    "description": "Duo id scaevola fabellas, sed te solum viderer. Id per modo novum labitur, brute minimum per ut. Ea qui melius lobortis, ut eos tritani periculis. Legere vocent est ut, dicunt iisque deseruisse at usu.",
+    "consumer_id": 4,
+    "skillcategory_id": 7
+  },
+  {
+    "id": 9,
+    "name": "Basement is short-circuiting",
+    "status": "CLOSED",
+    "service_date": "2022-08-01",
+    "description": "Duo id scaevola fabellas, sed te solum viderer. Id per modo novum labitur, brute minimum per ut. Ea qui melius lobortis, ut eos tritani periculis. Legere vocent est ut, dicunt iisque deseruisse at usu.",
+    "provider_id": 10,
+    "consumer_id": 4,
+    "skillcategory_id": 7
   }
+  
 ]

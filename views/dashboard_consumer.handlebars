@@ -1,0 +1,125 @@
+<div class="row col-md-10 d-flex flex-column align-item-center">
+<div class='row'>
+  <div class='col-md-7'>
+        <div class="bg-white p-2 border border-dark">
+          <h1> Your Service Requests</h1>
+          <div>
+            <div class="tab bg-white mb-4">
+              <button class="tablinks" onclick="openCity(event, 'Active')" id="defaultOpen">Active</button>
+              <button class="tablinks" onclick="openCity(event, 'RecentlyFilled')">Recently Filled</button>
+            </div>
+            <div id="Active" style="display:block" class="tabcontent">
+              {{#if services}}
+              <div>
+                {{#each services}}
+                <div class='card ml-3' style="width: 30%;">
+                  <div class='card-body p-3' id="card-service">
+                    <H5 class='card-title'>{{name}}</H5>
+                    <H5 class='card-title'>{{status}}</H5>
+                    <H5 class='card-title'>Service Date: {{format_date date_requested}}</H5>
+                    <p class='card-text'>{{description}}</p>
+                    <div class="row flex-row">
+                    <a href='/api/services/getting-started' class='btn btn-primary mr-1'>Edit detail</a>
+                    </div>
+                  </div>
+                </div>
+                {{/each}}
+                {{else}}
+                <div class='row'>
+                  <div class="ml-2">
+                    <p>No active job posts</p>
+                  </div>
+                  <div>
+                    <p>
+                      Post a service request and find your provider.
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <button type='submit' class='btn btn-primary float-right ml-2' id='continue_getting_started_btn'>
+                    Post a Service
+                    Request
+                  </button>
+                </div>
+              </div>
+              {{/if}}
+            </div>
+            <div id="RecentlyFilled" class="tabcontent">
+              <div></div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-12 bg-white mt-3 m-2 p-2 border border-dark">
+            <h1> Pending </h1>
+            <div class="border border-dark"></div>
+            <div>Pending request</div>
+          </div>
+        </div>
+        <div class="row border-0">
+          <button type='submit' class='btn btn-primary ml-2' id='continue_getting_started_btn'>
+              Post another Service Request
+          </button>
+        </div>        
+  </div>
+</div>
+<div class='col-md-5 d-block'>
+        <div class="card d-block">
+          <p>
+        Name: <strong>{{user.first_name}}</strong><br>
+        <input type="text" value="{{user.id}}" hidden>
+        </p>
+        
+        <button class="btn newclass" type="button" data-toggle="collapse" data-target="#uploadPhoto" aria-expanded="false" aria-controls="collapseExample">
+        <i class="fas fa-file-image-o" aria-hidden="true"></i>&nbsp;Upload Profile Photo
+        </button>
+        <div class="collapse" id="uploadPhoto">
+          <div class="card card-body">
+            <form method="POST" action="/upload/{{id}}" enctype="multipart/form-data">
+              <input type="file" name="image" />
+              <input type="submit" />
+            </form>  
+          </div>
+        </div>
+        </div>
+          <div id='carouselExampleSlidesOnly' class='carousel slide d-flex justify-content-end' data-ride='carousel'>
+            <div class='carousel-inner'>
+              <div class='carousel-item active'>
+                <img class='d-block w-100' src='../images/review3.png' alt='First slide' />
+              </div>
+              <div class='carousel-item'>
+                <img class='d-block w-100' src='../images/review4.png' alt='Second slide' />
+              </div>
+              <div class='carousel-item'>
+                <img class='d-block w-100' src='../images/review5.png' alt='Third slide' />
+              </div>
+            </div>
+          </div>
+</div>
+
+<script src='../../js/dashboard.js'></script>
+
+    <script>
+      function openCity(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+
+      }
+
+    </script>

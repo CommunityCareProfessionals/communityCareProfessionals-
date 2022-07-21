@@ -1,63 +1,49 @@
 const User = require('./User');
-const Project = require('./Project');
 const Category = require('./Category');
 const Skill = require('./Skill');
 const SkillCategory = require('./SkillCategory');
 const UserSkill = require('./UserSkill');
 const ServiceRequest = require('./ServiceRequest');
 
-User.hasMany(Project, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE',
-});
-
-Project.belongsTo(User, {
-  foreignKey: 'user_id',
-});
-
 Category.belongsToMany(Skill, {
   through: {
     model: SkillCategory,
+    foreignKey: 'category_id',
     unique: true,
   },
-  // Define an alias for when data is retrieved
   as: 'category_skills',
 });
 
 Skill.belongsToMany(Category, {
   through: {
     model: SkillCategory,
+    foreignKey: 'skill_id',
     unique: true,
   },
-  // Define an alias for when data is retrieved
   as: 'skill_categories',
 });
 
-User.belongsToMany(Skill, {
+Skill.hasMany(SkillCategory);
+SkillCategory.belongsTo(Skill);
+Category.hasMany(SkillCategory);
+SkillCategory.belongsTo(Category);
+
+User.belongsToMany(SkillCategory, {
   through: {
     model: UserSkill,
+    foreignKey: 'user_id',
     unique: true,
   },
-  // Define an alias for when data is retrieved
-  as: 'user_skills',
+  as: 'provider_skills',
 });
 
-Skill.belongsToMany(User, {
+SkillCategory.belongsToMany(User, {
   through: {
     model: UserSkill,
+    foreignKey: 'skillcategory_id',
     unique: true,
   },
-  // Define an alias for when data is retrieved
-  as: 'skill_users',
-});
-
-Skill.hasMany(ServiceRequest, {
-  foreignKey: 'skill_id',
-  onDelete: 'CASCADE',
-});
-
-ServiceRequest.belongsTo(Skill, {
-  foreignKey: 'skill_id',
+  as: 'skill_providers',
 });
 
 User.hasMany(ServiceRequest, {
@@ -80,4 +66,47 @@ ServiceRequest.belongsTo(User, {
   foreignKey: 'consumer_id',
 });
 
-module.exports = { User, Project, Category, Skill, UserSkill };
+// SkillCategory.belongsToMany(ServiceRequest, {
+//   through: {
+//     model: SkillCategory,
+//     foreignKey: 'skillcategory_id',
+//     unique: true,
+//   },
+//   as: 'skill_service_requests',
+// });
+
+// ServiceRequest.belongsToMany(Skill, {
+//   through: {
+//     model: SkillCategory,
+//     foreignKey: 'category_skill_id',
+//     unique: true,
+//   },
+//   as: 'service_request_skills',
+// });
+
+// SkillCategory.belongsToMany(ServiceRequest, {
+//   through: {
+//     model: SkillCategory,
+//     foreignKey: 'category_skill_id',
+//     unique: true,
+//   },
+//   as: 'category_service_requests',
+// });
+
+// ServiceRequest.belongsToMany(Category, {
+//   through: {
+//     model: SkillCategory,
+//     foreignKey: 'category_skill_id',
+//     unique: true,
+//   },
+//   as: 'service_request_categories',
+// });
+
+module.exports = {
+  User,
+  Category,
+  Skill,
+  SkillCategory,
+  UserSkill,
+  ServiceRequest,
+};

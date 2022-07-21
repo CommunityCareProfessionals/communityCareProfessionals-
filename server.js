@@ -4,8 +4,14 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
+require('dotenv').config();
 
+const multer = require('multer');
+const uuid = require('uuid').v4;
+
+const { s3Uploadv2 } = require('./s3Service');
 const sequelize = require('./config/connection');
+const { User } = require('./models');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
@@ -26,9 +32,16 @@ const sess = {
 
 app.use(session(sess));
 
+//Allows you to access session objects from handlerbars template. Eg. {{session.user_id}}
+app.use(function (req, res, next) {
+  res.locals.session = req.session;
+  next();
+});
+
 // Inform Express.js on which template engine to use
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -36,6 +49,77 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-sequelize.sync({ alter: true, force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening...'));
+const sync_options = {
+  alter: process.env.ENVIRONMENT == 'dev',
+  force: process.env.ENVIRONMENT == 'dev-rebuild',
+};
+
+sequelize.sync(sync_options).then(() => {
+  app.listen(PORT, () =>
+    console.log(
+      `${new Date()} Now listening (env: ${
+        process.env.ENVIRONMENT
+      })...sync_options: ${JSON.stringify(sync_options)}`
+    )
+  );
 });
+
+const storage = multer.memoryStorage();
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.split('/')[0] === 'image') {
+    cb(null, true)
+  } else {
+    cb(new multer.MulterError("LIMIT_UNEXPECTED_FILE"), false);
+  }
+};
+
+const upload = multer({
+  storage, 
+  fileFilter, 
+  limits: {fileSize: 1000000} });
+
+
+app.post("/upload/:id", upload.single("image"), async (req, res) => {
+  try {
+    const result = await s3Uploadv2(req.file);
+    const newProfileImage = result.Location;
+    User.update({
+      profileImage: newProfileImage,
+    },
+    {
+      where: {
+
+        id: req.params.id,
+      }
+    })
+    // return res.json({status: "success", result });
+    // console.log(result);
+    res.redirect('/api/dashboard');
+  } catch (err) {
+    console.log(err)
+  }
+});
+
+app.use((error, req, res, next) => {
+  //multer error return for file size
+  if (error instanceof multer.MulterError) {
+    if (error.code === "LIMIT_FILE_SIZE") {
+      return res.status(400).json({
+        message: "file is too large"
+      })
+    }
+    //error for file count limit exceeding 1 file
+    if (error.code === "LIMIT_FILE_COUNT") {
+      return res.status(400).json({
+        message: "More than one file selected"
+      })
+    }
+    //error for unexpected file type
+    if (error.code === "LIMIT_UNEXPECTED_FILE") {
+      return res.status(400).json({
+        message: "File must be an image"
+      })
+    }
+  };
+})
