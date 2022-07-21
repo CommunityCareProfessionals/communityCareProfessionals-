@@ -29,6 +29,12 @@ if (document.querySelector('#editBtn')) {
 
 }
 
+if (document.querySelector('#new-post-cons')) {
+  document
+    .querySelector('#new-post-cons')
+    .addEventListener(gotoGettingStarted)
+}
+
 updateServiceRequest = async () => {
   const id = document
     .querySelector('#close_service_request_btn')

@@ -26,7 +26,7 @@
                   <div class='card-body p-3' id="card-service">
                     <h5 class='card-title'>{{name}}</h5>
                     <p class='card-text'>{{description}}</p>
-                    <a href='#' class='btn btn-primary'>Edit detail</a>
+                    <a href='/api/services/getting-started' class='btn btn-primary'>Edit detail</a>
                   </div>
                 </div>
 
@@ -37,11 +37,11 @@
                 </div>
                 {{/each}}
                 {{else}}
-                <div class='row'>
+                <div class='row ml-2'>
                   <p>No active job posts</p>
                   <p>Post a service request and find your provider.</p>
-                  <button type='submit' class='btn btn-primary' id='continue_getting_started_btn'>Post a Service
-                    Request</button>
+                  <button type='submit' class='btn btn-primary' id='continue_getting_started_btn'><a href='/api/services/getting-started'>Post a Service
+                    Request</a></button>
                 </div>
                 {{/if}}
               </div>

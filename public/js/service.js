@@ -284,10 +284,16 @@ if (document.querySelector('#new_service_radio')) {
     .addEventListener('change', newOrExistingServiceHandler);
 }
 
+// if (document.querySelector('#continue_getting_started_btn')) {
+//   document
+//     .querySelector('#continue_getting_started_btn')
+//     .addEventListener('click', gettingStartedContinueHandler);
+// }
+
 if (document.querySelector('#continue_getting_started_btn')) {
   document
     .querySelector('#continue_getting_started_btn')
-    .addEventListener('click', gettingStartedContinueHandler);
+    .addEventListener('click', gotoTitle);
 }
 
 if (document.querySelector('#cancel_getting_started_btn')) {
