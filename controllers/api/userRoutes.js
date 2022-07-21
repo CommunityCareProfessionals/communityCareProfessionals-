@@ -15,8 +15,6 @@ router.post('/', async (req, res) => {
       delete userData.password; // alternatively, delete userData["password"]
     }
 
-    console.log(userData);
-
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
@@ -61,8 +59,6 @@ router.post('/login', async (req, res) => {
       });
 
       req.session.demo_users = demoUsers;
-
-      console.log('demoUsers: ', demoUsers);
     }
 
     req.session.save(() => {

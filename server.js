@@ -9,7 +9,7 @@ require('dotenv').config();
 const multer = require('multer');
 const uuid = require('uuid').v4;
 
-const { s3Uploadv2 } = require('./s3Service')
+const { s3Uploadv2 } = require('./s3Service');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
@@ -75,8 +75,8 @@ sequelize.sync(sync_options).then(() => {
 // };
 
 // const upload = multer({
-//   storage, 
-//   fileFilter, 
+//   storage,
+//   fileFilter,
 //   //limits file size to 1MB
 //   limits: {fileSize: 1000000} });
 

@@ -88,10 +88,11 @@ router.get('/match', async (req, res) => {
 
     const services = serviceData.map((service) => service.get({ plain: true }));
 
-    console.log('services', services);
+    console.log('1111services.length > 0', services.length > 0);
 
     res.render('services', {
       services,
+      has_new_services: services.length > 0,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -182,8 +183,6 @@ router.get('/title', async (req, res) => {
       return category.get({ plain: true });
     });
 
-    console.log(categories[0].category_skills);
-
     res.render('service_title', {
       categories,
       top_categories: categories.slice(0, 3),
@@ -210,8 +209,6 @@ router.get('/publishskill', async (req, res) => {
     const categories = categoryData.map((category) => {
       return category.get({ plain: true });
     });
-
-    console.log(categories[0].category_skills);
 
     res.render('service_publish_skill', {
       categories,
@@ -249,8 +246,6 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    console.log('req.params.id', req.params.id);
-
     const updatedService = await ServiceRequest.update(
       {
         provider_id: req.session.user.id,
@@ -262,8 +257,6 @@ router.put('/:id', async (req, res) => {
       }
     );
 
-    console.log('Updated Service', updatedService);
-
     res.status(200).json(updatedService);
   } catch (err) {
     console.log(err);
@@ -273,22 +266,15 @@ router.put('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    console.log('req.params.id', req.params.id);
-  
     const updateService = await ServiceRequest.update(req.body, {
-  
-      where: {id:req.params.id}
-  
+      where: { id: req.params.id },
     });
 
-  res.status(200).json(updateService);
-
-} catch(err) {
-  console.log(err); 
-    res.status(500).json({ message: 'failed to update service request'})
+    res.status(200).json(updateService);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'failed to update service request' });
   }
-
-  
 });
 
 module.exports = router;
