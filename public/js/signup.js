@@ -39,8 +39,8 @@ const signupFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/dashboard');
     } else {
-      alert(response.statusText);
-      console.log('fail');
+      const data = await response.json();
+      alert(data.message);
     }
   }
 };
