@@ -18,11 +18,6 @@ const gettingStartedContinueHandler = async (e) => {
       gotoPublishSkill();
     } else if (document.querySelector('#match_service_radio').checked) {
       gotoMatchServiceRequest();
-    } else {
-      document.location.replace(
-        '/api/services/' +
-          document.querySelector('#existing-service-to-edit').value
-      );
     }
   } else {
     if (document.querySelector('#new_service_radio').checked) {
@@ -224,19 +219,18 @@ updateServiceRequest = async () => {
   }
 };
 
-
 updateServiceRequestConsumer = async () => {
   const id = document
-    .querySelector("#continue_title_btn")
-    .getAttribute("data-id");
+    .querySelector('#continue_title_btn')
+    .getAttribute('data-id');
   if (id) {
-    const response = await fetch("/api/services/" + id, {
-      method: "PUT",
+    const response = await fetch('/api/services/' + id, {
+      method: 'PUT',
       body: JSON.stringify({
         id,
       }),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
     if (response.ok) {
@@ -246,7 +240,6 @@ updateServiceRequestConsumer = async () => {
     }
   }
 };
-
 
 gotoPublishSkill = (e) => {
   document.location.replace('/api/services/publishskill');
@@ -260,9 +253,9 @@ const enableGettingStartedContinueBtn = (btn) => {
   document.querySelector('#continue_getting_started_btn').disabled = false;
 };
 
-const gotoTitle = (e) => {
-  document.location.replace('/api/services/title');
-};
+// const gotoTitle = (e) => {
+//   document.location.replace('/api/services/title');
+// };
 
 const gotoGettingStarted = (e) => {
   document.location.replace('/api/services/getting-started');
@@ -284,17 +277,17 @@ if (document.querySelector('#new_service_radio')) {
     .addEventListener('change', newOrExistingServiceHandler);
 }
 
-// if (document.querySelector('#continue_getting_started_btn')) {
-//   document
-//     .querySelector('#continue_getting_started_btn')
-//     .addEventListener('click', gettingStartedContinueHandler);
-// }
-
 if (document.querySelector('#continue_getting_started_btn')) {
   document
     .querySelector('#continue_getting_started_btn')
-    .addEventListener('click', gotoTitle);
+    .addEventListener('click', gettingStartedContinueHandler);
 }
+
+// if (document.querySelector('#continue_getting_started_btn')) {
+//   document
+//     .querySelector('#continue_getting_started_btn')
+//     .addEventListener('click', gotoTitle);
+// }
 
 if (document.querySelector('#cancel_getting_started_btn')) {
   document

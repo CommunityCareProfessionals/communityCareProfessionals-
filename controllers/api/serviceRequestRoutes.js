@@ -88,7 +88,7 @@ router.get('/match', async (req, res) => {
 
     const services = serviceData.map((service) => service.get({ plain: true }));
 
-    console.log('1111services.length > 0', services.length > 0);
+    // console.log('1111services.length > 0', services.length > 0);
 
     res.render('services', {
       services,
