@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const DemoSeed = require('../../seeds/demoSeed');
 
 router.post('/', async (req, res) => {
   try {
@@ -89,6 +90,16 @@ router.post('/logout', (req, res) => {
     });
   } else {
     res.status(404).end();
+  }
+});
+
+router.post('/resetdemo', (req, res) => {
+  console.log('Demoseed - req.session.isAdmin', req.session);
+  if (req.session.isDemo) {
+    DemoSeed();
+    res.status(200).json({ message: 'Database has been re-seeded' });
+  } else {
+    res.status(404).json({ message: 'Unauthorized request' });
   }
 });
 
