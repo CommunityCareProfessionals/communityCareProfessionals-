@@ -32,7 +32,7 @@ updateServiceRequest = async () => {
     });
 
     if (response.ok) {
-      gotoDashboard();
+      document.location.replace('/dashboard');
     } else {
       alert(await response.json().message);
     }
@@ -61,6 +61,6 @@ if (document.querySelector('#update_existing_skill_btn')) {
 
 if (document.querySelector('#close_service_request_btn')) {
   document
-    .querySelector('#close_service_request_btn')
-    .addEventListener('click', updateServiceRequest);
+    .querySelectorAll('#close_service_request_btn')
+    .forEach((btn) => btn.addEventListener('click', updateServiceRequest));
 }
