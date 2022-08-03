@@ -1,7 +1,3 @@
-var gotoDashboard = (e) => {
-  document.location.replace('/dashboard');
-};
-
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
@@ -20,7 +16,7 @@ async function submitLoginForm(email, password) {
     });
 
     if (response.ok) {
-      gotoDashboard();
+      document.location.replace('/dashboard');
     } else {
       const data = await response.json();
       alert(data.message);

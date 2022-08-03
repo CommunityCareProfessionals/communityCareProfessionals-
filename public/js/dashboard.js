@@ -6,34 +6,9 @@ const gotoPublishSkill = (e) => {
   document.location.replace('/api/services/getting-started');
 };
 
-if (document.querySelector('#continue_getting_started_btn')) {
-  document
-    .querySelector('#continue_getting_started_btn')
-    .addEventListener('click', gotoGettingStarted);
-}
-
-if (document.querySelector('#update_existing_skill_btn')) {
-  document
-    .querySelector('#update_existing_skill_btn')
-    .addEventListener('click', gotoPublishSkill);
-}
-
 const goEditPost = (e) => {
   document.location.replace('/api/services/getting-started');
 };
-
-if (document.querySelector('#editBtn')) {
-  document
-    .querySelector('#editBtn')
-    .addEventListener('click', goEditPost);
-
-}
-
-if (document.querySelector('#new-post-cons')) {
-  document
-    .querySelector('#new-post-cons')
-    .addEventListener(gotoGettingStarted)
-}
 
 updateServiceRequest = async () => {
   const id = document
@@ -63,6 +38,26 @@ updateServiceRequest = async () => {
     }
   }
 };
+
+if (document.querySelector('#editBtn')) {
+  document.querySelector('#editBtn').addEventListener('click', goEditPost);
+}
+
+if (document.querySelector('#new-post-cons')) {
+  document.querySelector('#new-post-cons').addEventListener(gotoGettingStarted);
+}
+
+if (document.querySelector('#continue_getting_started_btn')) {
+  document
+    .querySelector('#continue_getting_started_btn')
+    .addEventListener('click', gotoGettingStarted);
+}
+
+if (document.querySelector('#update_existing_skill_btn')) {
+  document
+    .querySelector('#update_existing_skill_btn')
+    .addEventListener('click', gotoPublishSkill);
+}
 
 if (document.querySelector('#close_service_request_btn')) {
   document

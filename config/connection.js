@@ -17,7 +17,7 @@ if (process.env.JAWSDB_URL) {
       query: {
         raw: false,
       },
-      logging: true,
+      logging: false,
       // dialectOptions: {
       //   // useUTC: false, //for reading from database
       //   dateStrings: true,
