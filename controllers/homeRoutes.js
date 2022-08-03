@@ -85,7 +85,7 @@ router.get('/signup', async (req, res) => {
   }
 });
 
-router.get('/register', withAuth, async (req, res) => {
+router.get('/register', async (req, res) => {
   res.render('register', {
     isProvider: req.query.type === 'provider',
     type: req.query.type,
