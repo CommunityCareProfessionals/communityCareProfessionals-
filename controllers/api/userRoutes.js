@@ -2,20 +2,14 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 router.post('/', async (req, res) => {
-  console.log('userRoute.post called', req.body);
-
   try {
     let userData = await User.findOne({ where: { email: req.body.email } });
-
-    console.log('userData.b4', userData);
 
     // Added by TP for testing only
     if (userData) {
       res.status(400).json({ message: 'User already exists' });
       return;
     }
-
-    console.log('userData', userData);
 
     userData = await User.create(req.body);
 
