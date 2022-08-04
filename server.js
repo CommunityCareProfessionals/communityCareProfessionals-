@@ -4,9 +4,15 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
+const multer = require('multer')
+const uuid = require('uuid').v4
 require('dotenv').config();
 
 const sequelize = require('./config/connection');
+const { s3Uploadv2 } = require("./s3Service")
+const { User } = require('./models')
+const req = require('express/lib/request');
+const { consumers } = require('stream');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
@@ -43,6 +49,65 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
+
+const storage = multer.memoryStorage();
+
+//checks to make sure upload is an image file type
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.split('/')[0] === 'image') {
+    cb(null, true)
+  } else {
+    cb(new multer.MulterError("LIMIT_UNEXPECTED_FILE"), false);
+  }
+};
+
+const upload = multer({
+  storage, 
+  fileFilter, 
+  limits: {fileSize: 10000000} });
+
+app.post("/upload", upload.single("image"), async (req, res) => {
+  try {
+    const result = await s3Uploadv2(req.file);
+    const newProfileImage = result.Location;
+
+    User.update({
+      profileImage: newProfileImage,
+    },
+    {
+      where: {
+        id: req.params.id,
+      }
+    })
+    res.redirect('/dashboard');
+  } catch (err) {
+    console.log(err)
+  }
+});
+
+app.use((error, req, res, next) => {
+  //multer error return for file size
+  if (error instanceof multer.MulterError) {
+    if (error.code === "LIMIT_FILE_SIZE") {
+      return res.status(400).json({
+        message: "file is too large"
+      })
+    }
+    //error for file count limit exceeding 1 file
+    if (error.code === "LIMIT_FILE_COUNT") {
+      return res.status(400).json({
+        message: "More than one file selected"
+      })
+    }
+    //error for unexpected file type
+    if (error.code === "LIMIT_UNEXPECTED_FILE") {
+      return res.status(400).json({
+        message: "File must be an image"
+      })
+    }
+  };
+})
+
 
 const sync_options = {
   alter: process.env.ENVIRONMENT == 'dev',

@@ -1,6 +1,6 @@
 const { S3 } = require("aws-sdk");
 const uuid = require('uuid').v4;
-// require('dotenv').config();
+require('dotenv').config();
 
 
 exports.s3Uploadv2 = async (file) => {
